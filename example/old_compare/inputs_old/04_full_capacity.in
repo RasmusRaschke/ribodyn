@@ -1,0 +1,21 @@
+0.0005                  # dt
+3.0               # t_end
+1.1                   # mass
+0.1                   # radius
+9.81                   # gravitational acceleration
+7.0           # incline angle theta in degrees
+0.7          # mu_x body
+0.25          # mu_y body
+0.1          # mu_z body
+0.15                # B_x inertial
+-0.08                # B_y inertial
+0.6                # B_z inertial
+90.0            # spin about plane normal, degrees/s
+1                     # Coulomb rolling resistance
+0.015             # Coulomb coefficient nu
+80.0                   # tanh smoothing steepness
+1                     # translational air drag enabled
+1.225                 # air density
+0.47                  # drag coefficient
+0.0                   # x0
+0.0                   # y0

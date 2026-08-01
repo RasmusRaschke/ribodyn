@@ -68,3 +68,41 @@ class RotatingUniformEMField final : public ElectromagneticField{
         vec3 magneticField(const State& state, double t) const override;
         mat3 magneticFieldJacobian(const State& state, double t) const override;
 };
+
+class SphereAirResistance final : public Force{
+    private:
+        double rho;
+        double eta;
+        double Cd;
+        double Crot;
+        vec3 flowVelocity;
+        vec3 flowAngularVelocity;
+    public:
+        SphereAirResistance(
+            double airDensity,
+            double dynamicViscosity,
+            double translationalDragCoefficient,
+            double rotationalDragCoefficient,
+            const vec3& airVelocity = vec3::Zero(),
+            const vec3& airAngularVelocity = vec3::Zero()
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};
+
+class RegularizedCoulombRollingResistance final : public Force{
+    private:
+        double mu;
+        double load;
+        vec3 normal;
+        double velocityScale;
+        vec3 planeVelocity;
+    public:
+        RegularizedCoulombRollingResistance(
+            double frictionCoefficient,
+            double normalLoad,
+            const vec3& planeNormal,
+            double smoothingSpeed,
+            const vec3& surfaceVelocity = vec3::Zero()
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};

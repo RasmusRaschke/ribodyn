@@ -64,5 +64,17 @@
   "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o -c /home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o -c /home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o"
 }
 ]

@@ -23,6 +23,8 @@ add_executable(
     systems/centralGravity.cpp
     systems/uniformEMField.cpp
     systems/rotatingUniformEMField.cpp
+    systems/sphereAirResistance.cpp
+    systems/regularizedCoulombRollingResistance.cpp
 )
 
 target_link_libraries(

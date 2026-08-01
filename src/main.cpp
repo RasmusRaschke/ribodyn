@@ -68,9 +68,69 @@ void addConstraint(MechanicalSystem& system, const Input& input){
         system.constraints.push_back(std::make_unique<RollingConstraint>(system.body.radius, normal));
         return;
     }
-    throw std::runtime_error(
-        "Unknown constraint type: " + type
-    );
+    throw std::runtime_error("Unknown constraint type: " + type);
+}
+
+void addDissipativeForces(MechanicalSystem& system, const Input& input){
+    if(input.has("airType")){
+        const std::string airType = input.getString("airType");
+        if(airType == "sphere"){
+            system.forces.push_back(
+                std::make_unique<SphereAirResistance>(
+                    input.getDouble("airDensity"),
+                    input.getDouble("airDynamicViscosity"),
+                    input.getDouble("airDragCoefficient"),
+                    input.getDouble(
+                        "airRotationalDragCoefficient"
+                    ),
+                    input.getVec3("airVelocity"),
+                    input.getVec3("airAngularVelocity")
+                )
+            );
+        }
+        else if(airType != "none"){
+            throw std::runtime_error(
+                "Unknown air resistance type: "
+                + airType
+            );
+        }
+    }
+
+    if(input.has("rollingResistanceType")){
+        const std::string resistanceType = input.getString("rollingResistanceType");
+        if (resistanceType == "coulomb"){
+            vec3 normal = input.getVec3("normal");
+            const double normalNorm = normal.norm();
+            if (normalNorm < 1e-14){
+                throw std::runtime_error("Rolling-resistance normal must be nonzero.");
+            }
+            normal /= normalNorm;
+            double normalLoad = 0.0;
+            if (input.has("normalLoad")){
+                normalLoad = input.getDouble("normalLoad");
+            }
+            else{
+                if(input.getString("gravityType") != "uniform"){
+                    throw std::runtime_error(
+                        "normalLoad is required unless uniform gravity is used."
+                    );
+                }
+                const vec3 gravity = input.getVec3("gravity");
+                normalLoad = std::max(0.0, -system.body.mass * gravity.dot(normal));
+            }
+            system.forces.push_back(std::make_unique<RegularizedCoulombRollingResistance>(
+                    input.getDouble("rollingFrictionCoefficient"),
+                    normalLoad,
+                    normal,
+                    input.getDouble("rollingFrictionSmoothingSpeed"),
+                    input.getVec3("surfaceVelocity")
+                )
+            );
+        }
+        else if(resistanceType != "none"){
+            throw std::runtime_error("Unknown rolling resistance type: " + resistanceType);
+        }
+    }
 }
 
 void addGravity(MechanicalSystem& system, const Input& input){
@@ -140,6 +200,7 @@ int main(int argc, char* argv[]){
         addConstraint(system, input);
         addGravity(system, input);
         addElectromagnetism(system, input);
+        addDissipativeForces(system, input);
         State state;
         state.r = input.getVec3("position");
         state.v = input.getVec3("velocity");

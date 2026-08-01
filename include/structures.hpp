@@ -28,10 +28,7 @@ struct ConstraintData{
 
 class Constraint{
     public:
-        virtual ConstraintData evaluate(
-            const State& state,
-            double time
-        ) const = 0;
+        virtual ConstraintData evaluate(const State& state, double time) const = 0;
 
         virtual ~Constraint() = default;
 };
@@ -90,7 +87,8 @@ class MechanicalSystem{
     public:
         Body body;
         std::vector<std::unique_ptr<Constraint>> constraints;
-        std::vector<std::unique_ptr<Force>> forces;
+        std::vector<std::unique_ptr<Force>> nonConservativeForces;
+        std::vector<std::unique_ptr<Force>> dAlembertForces;
         std::vector<std::unique_ptr<Potential>> potentials;
         std::vector<std::unique_ptr<GravitationalField>> gravityFields;
         std::vector<std::unique_ptr<ElectromagneticField>> emFields;

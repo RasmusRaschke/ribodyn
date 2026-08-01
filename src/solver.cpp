@@ -100,7 +100,9 @@ tau_dipole =  mu_body x B_body , B_body = R^T B
 */
 Wrench Solver::assembleGeneralizedForce(const State& s, double t) const {
     Wrench total;
-    for(const auto& force : system.forces)
+    for(const auto& force : system.dAlembertForces)
+        total += force->evaluate(system.body, s, t);
+    for(const auto& force : system.nonConservativeForces)
         total += force->evaluate(system.body, s, t);
     for(const auto& field : system.gravityFields){
         total.force += system.body.mass * field->acceleration(s,t);
@@ -133,6 +135,9 @@ Wrench Solver::assembleLagrangianWrench(const State& s, double t) const {
         const Wrench grad = p->gradient(system.body, s, t);
         total.force -= grad.force;
         total.torque -= grad.torque;
+    }
+    for(const auto& force : system.nonConservativeForces){
+        total += force->evaluate(system.body, s, t);
     }
     for(const auto& field : system.gravityFields){
         total.force += system.body.mass * field->acceleration(s, t);

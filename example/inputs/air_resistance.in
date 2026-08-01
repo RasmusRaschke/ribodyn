@@ -1,0 +1,30 @@
+# Sphere with translational and rotational air resistance.
+mass 1.0
+radius 0.1
+charge 0.0
+magneticMoment 0.0 0.0 0.0
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+inertia 0.004 0 0  0 0.004 0  0 0 0.004
+
+position 0.0 0.0 0.0
+velocity 8.0 0.0 0.0
+omega 0.0 0.0 40.0
+quaternion 1.0 0.0 0.0 0.0
+
+solverMode dAlembert
+constraint none
+gravityType none
+emType none
+
+airType sphere
+airDensity 1.225
+airDynamicViscosity 1.81e-5
+airDragCoefficient 0.47
+airRotationalDragCoefficient 0.20
+airVelocity 0.0 0.0 0.0
+airAngularVelocity 0.0 0.0 0.0
+
+rollingResistanceType none
+
+dt 0.0005
+tEnd 4.0

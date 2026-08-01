@@ -1,0 +1,21 @@
+0.0005                  # dt
+2.5               # t_end
+1.2                   # mass
+0.12                   # radius
+9.81                   # gravitational acceleration
+5.0             # incline angle in degrees
+0.8               # mu_x body
+0.2               # mu_y body
+0.1               # mu_z body
+0.2                # B_x inertial
+-0.1                # B_y inertial
+0.7                # B_z inertial
+0.0    # spin about plane normal, degrees/s
+0                     # rolling resistance off
+0.0                   # rolling coefficient
+100.0                 # smoothing steepness, unused
+0                     # air resistance off
+1.225                 # air density, unused
+0.47                  # drag coefficient, unused
+0.0          # x0
+0.0          # y0

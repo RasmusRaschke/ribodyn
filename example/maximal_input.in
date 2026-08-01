@@ -1,0 +1,186 @@
+# maximal input template
+#
+# Format: key value...
+# Everything after '#' is ignored.
+#
+# IMPORTANT:
+# - Vectors use: x y z
+# - Quaternions use: w x y z
+# - 3x3 matrices are entered row by row.
+# - INERTIAL means that a quantity is given in the outer inertial frame.
+# - BODY means that a quantity is given in the bodies inner comoving frame.
+
+# -----------------------------------------------------------------------------
+# Rigid-body properties
+# -----------------------------------------------------------------------------
+
+mass 1.0
+radius 0.1
+charge 0.2
+
+# Permanent magnetic dipole in BODY coordinates.
+magneticMoment 0.4 0.1 0.2
+# Magnetic polarizability tensor in BODY coordinates.
+# This matrix should be symmetric (in most cases).
+magneticPolarizability 0.02 0.00 0.00  0.00 0.01 0.00  0.00 0.00 0.03
+
+# Inertia tensor in BODY coordinates.
+inertia 0.004 0.000 0.000  0.000 0.004 0.000  0.000 0.000 0.004
+
+# -----------------------------------------------------------------------------
+# Initial state
+# -----------------------------------------------------------------------------
+
+# INERTIAL-frame COM position.
+# For the active plane normal, this is radius * normal! Be accurate, else the
+# sphere is not tangent to the plane.
+position 0 -0.01736481776669303 0.0984807753012208
+
+# INERTIAL-frame COM velocity.
+velocity 0.0 0.0 0.0
+
+# BODY-frame angular velocity.
+omega 0.0 0.0 0.0
+
+# BODY<->INERTIAL quaternion. Standard (1,0,0,0) aligns both frames at t=0.
+quaternion 1.0 0.0 0.0 0.0
+
+
+# -----------------------------------------------------------------------------
+# Equation formulation
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     dAlembert
+#     lagrangian
+
+solverMode lagrangian
+
+
+# -----------------------------------------------------------------------------
+# Constraint model
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     rolling
+constraint rolling
+
+# Fixed INERTIAL-frame plane normal. The angle of the incline is determined by
+# the normal alone. It does not have to be normalized.
+normal 0 -0.1736481776669303 0.984807753012208
+
+
+# -----------------------------------------------------------------------------
+# Gravity model
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     uniform
+#     central
+gravityType uniform
+
+# Required for gravityType uniform.
+gravity 0.0 0.0 -9.81
+
+### Alternatives: ###
+#-----------------------------
+# gravityType central
+# mu 1.0
+# ----------------------------
+# gravityType none
+
+
+# -----------------------------------------------------------------------------
+# Electromagnetic field model
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     uniform
+#     rotatingUniform
+
+emType rotatingUniform
+
+# Active time-dependent field:
+#
+# B(t) = RotationMatrix(fieldRotationAxis, fieldAngularFrequency * t)
+#        * initialMagneticField
+#
+initialMagneticField 0.8 0.0 0.0
+fieldRotationAxis 0.0 0.0 1.0
+fieldAngularFrequency 0.65
+electricField 0.0 0.0 0.0
+
+### Alternatives: ###
+# ----------------------------
+# emType uniform
+# electricField 0.2 0.0 0.0
+# magneticField 0.0 0.0 0.8
+# ----------------------------
+# emType none
+
+
+# -----------------------------------------------------------------------------
+# Air resistance
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     sphere
+
+airType sphere
+airDensity 1.225
+# Set to zero to disable the linear Stokes terms.
+airDynamicViscosity 1.81e-5
+airDragCoefficient 0.47
+# Set to zero to disable quadratic rotational air resistance.
+airRotationalDragCoefficient 0.20
+# Inertial-frame ambient-air velocities.
+airVelocity 0.0 0.0 0.0
+airAngularVelocity 0.0 0.0 0.0
+
+# Alternatives: ###
+# ----------------------------
+# airType none
+# ----------------------------
+
+# -----------------------------------------------------------------------------
+# Regularized Coulomb rolling resistance
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     coulomb
+
+rollingResistanceType coulomb
+rollingFrictionCoefficient 0.03
+# Regularization speed v_s in tanh(|v_t| / v_s).
+rollingFrictionSmoothingSpeed 0.02
+
+# INERTIAL-frame material velocity of the supporting plane.
+surfaceVelocity 0.0 0.0 0.0
+
+# Explicit normal load N, i.e. normal force modulus.
+normalLoad 9.66096405704976
+
+# For a fixed plane under uniform gravity, normalLoad may be omitted.
+# The program then evaluates:
+#
+#     N = max(0, -mass * <gravity, normal>)
+
+
+### Alternatives: ###
+# ----------------------------
+# rollingResistanceType none
+# ----------------------------
+
+
+# -----------------------------------------------------------------------------
+# Integration interval
+# -----------------------------------------------------------------------------
+#Compared to magsphere, the improved RKMK4 should allow for larger increments
+
+dt 1e-3
+tEnd 10.0

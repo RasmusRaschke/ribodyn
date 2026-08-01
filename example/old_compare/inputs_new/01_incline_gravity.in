@@ -1,0 +1,25 @@
+mass 1.0
+radius 0.1
+charge 0.0
+magneticMoment 0.0 0.0 0.0
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+inertia 0.004000000000000001 0 0  0 0.004000000000000001 0  0 0 0.004000000000000001
+
+position 0.0 0.0 0.0009731931258429639
+velocity 0.0 0.0 0.0
+omega 0 -0 0
+quaternion 1.0 0.0 0.0 0.0
+
+solverMode dAlembert
+constraint rolling
+normal 0 -0.1391731009600654 0.9902680687415704
+
+gravityType uniform
+gravity 0.0 0.0 -9.81
+
+emType uniform
+electricField 0.0 0.0 0.0
+magneticField 0.0 0.0 0.0
+
+dt 0.0005
+tEnd 3.0005
