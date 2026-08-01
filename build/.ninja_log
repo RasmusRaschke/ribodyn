@@ -1,0 +1,15 @@
+# ninja log v7
+3	2413	1785583613150495297	CMakeFiles/solver.dir/src/io.cpp.o	6addda439c9b8e6d
+1	4470	1785500268823544936	CMakeFiles/solver.dir/src/main.cpp.o	79ee70a9c631f194
+4	3526	1785583613151236163	CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o	ec40cc9592cd8d77
+3	2540	1785583613150644997	CMakeFiles/solver.dir/src/utility.cpp.o	68dc3e2a558476f6
+3	9290	1785583613150779789	CMakeFiles/solver.dir/src/solver.cpp.o	175804fd265d11e2
+9301	9719	1785500278124455504	solver	7b1f8d3ac3230d25
+2	8	1785498613715081630	clean	7adf74806070bde8
+4	1700	1785583613151576168	CMakeFiles/solver.dir/systems/centralGravity.cpp.o	8119b5febc73228a
+3	2616	1785583613150916695	CMakeFiles/solver.dir/src/integrator.cpp.o	ce94dbd556b866b0
+4	1606	1785583613151401682	CMakeFiles/solver.dir/systems/uniformGravity.cpp.o	82de53e4a58bd1e6
+3	2648	1785583613151068990	CMakeFiles/solver.dir/src/emField.cpp.o	6a2d151daf7b5699
+4	2417	1785583613151752659	CMakeFiles/solver.dir/systems/uniformEMField.cpp.o	ed9830316431a99c
+1	3245	1785583713614867678	CMakeFiles/solver.dir/src/main.cpp.o	79ee70a9c631f194
+3246	3702	1785583716859837385	solver	7b1f8d3ac3230d25
