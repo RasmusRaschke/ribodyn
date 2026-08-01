@@ -64,7 +64,7 @@ bool util::nearZero(double x, double eps){
 
 /*
 Returns surface parallel part of a vector v according to:
-v_|| = v - <v,n>v
+v_|| = v - <v,n>n
 */
 vec3 util::project(const vec3& v, const vec3& n){
     return v - n.dot(v)*n;
@@ -72,7 +72,7 @@ vec3 util::project(const vec3& v, const vec3& n){
 
 /*
 The derivative of an element in SO(3) to fourth order used in RKMK4. The inverse Jacobian acts on Omega as
-J(u)^{-1}Omega = Omega + 0.5 u x Omega + 1/13 u x (u x Omega) + O(||u||^4).
+J(u)^{-1}Omega = Omega + 0.5 u x Omega + 1/12 u x (u x Omega) + O(||u||^4).
 */
 vec3 util::jacobianInverseSO3(const vec3& rotationVector, const vec3& tangent){
     const double thetaSquared = rotationVector.squaredNorm();

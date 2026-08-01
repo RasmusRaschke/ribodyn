@@ -22,6 +22,7 @@ add_executable(
     systems/uniformGravity.cpp
     systems/centralGravity.cpp
     systems/uniformEMField.cpp
+    systems/rotatingUniformEMField.cpp
 )
 
 target_link_libraries(

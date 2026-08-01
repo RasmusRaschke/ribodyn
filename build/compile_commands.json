@@ -1,62 +1,68 @@
 [
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/main.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/main.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/main.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/src/main.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/main.cpp.o -c /home/lyserg/Documents/ribodyn/src/main.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/src/main.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/main.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/io.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/io.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/io.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/src/io.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/io.cpp.o -c /home/lyserg/Documents/ribodyn/src/io.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/src/io.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/io.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/utility.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/utility.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/utility.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/src/utility.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/utility.cpp.o -c /home/lyserg/Documents/ribodyn/src/utility.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/src/utility.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/utility.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/solver.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/solver.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/src/solver.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/lyserg/Documents/ribodyn/src/solver.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/src/solver.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/solver.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/integrator.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/integrator.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/integrator.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/src/integrator.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/integrator.cpp.o -c /home/lyserg/Documents/ribodyn/src/integrator.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/src/integrator.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/integrator.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/emField.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/emField.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/src/emField.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/src/emField.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/emField.cpp.o -c /home/lyserg/Documents/ribodyn/src/emField.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/src/emField.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/emField.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/rollingConstraint.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/rollingConstraint.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/uniformGravity.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/uniformGravity.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/systems/uniformGravity.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/uniformGravity.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/centralGravity.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/centralGravity.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/centralGravity.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/systems/centralGravity.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/centralGravity.cpp.o -c /home/lyserg/Documents/ribodyn/systems/centralGravity.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/centralGravity.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/centralGravity.cpp.o"
 },
 {
-  "directory": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o -c /home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/uniformEMField.cpp",
-  "file": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/systems/uniformEMField.cpp",
-  "output": "/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/CMakeFiles/solver.dir/systems/uniformEMField.cpp.o"
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/uniformEMField.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o"
 }
 ]

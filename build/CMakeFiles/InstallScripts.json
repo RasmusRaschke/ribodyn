@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/lyserg/Documents/hiwi25/code/cpp/ribodyn/build/cmake_install.cmake"
+		"/home/lyserg/Documents/ribodyn/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

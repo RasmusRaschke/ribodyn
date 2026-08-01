@@ -18,7 +18,7 @@ vec3 CentralGravity::acceleration(const State& s, double) const {
 
 /*
 Calculates the potential at a point given by
-U_grav = mu * ||r||
+phi = - mu * ||r||
 */
 double CentralGravity::potential(const State& s, double) const {
     return -mu / s.r.norm();

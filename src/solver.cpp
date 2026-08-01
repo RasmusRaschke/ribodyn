@@ -93,10 +93,10 @@ ConstraintData Solver::assembleConstraints(const State& s,double t) const{
 
 /*
 Assembles the generalized forces for the dAlembertian solver, comprised of external and conservative forces.
-The EM-forces are directly calculated by the Lorenz law: F_em = q * (E + v x B)
+The EM-forces are directly calculated by the Lorentz law: F_em = q * (E + v x B)
 The force and torque induced by a permanent and an induced magnetic moment are:
 F_dipole = grad(<mu, B>) = J(B)^T mu
-tau_dipole = - mu_body Ü B_body, B_body = R^T B
+tau_dipole =  mu_body x B_body , B_body = R^T B
 */
 Wrench Solver::assembleGeneralizedForce(const State& s, double t) const {
     Wrench total;
@@ -105,25 +105,27 @@ Wrench Solver::assembleGeneralizedForce(const State& s, double t) const {
     for(const auto& field : system.gravityFields){
         total.force += system.body.mass * field->acceleration(s,t);
     }
+    vec3 E = vec3::Zero();
+    vec3 B = vec3::Zero();
     for(const auto& field : system.emFields){
         const vec3 E = field->electricField(s,t);
         const vec3 B = field->magneticField(s,t);
-        total.force += system.body.charge * (E + s.v.cross(B));
-        const MagneticResponse magnetic = calculateMagneticResponse(system, s, t);
-        total.force += magnetic.fieldJacobian.transpose() * magnetic.momentWorld;
-        total.torque += magnetic.momentBody.cross(magnetic.BBody);
     }
+    total.force += system.body.charge * (E + s.v.cross(B));
+    const MagneticResponse magnetic = calculateMagneticResponse(system, s, t);
+    total.force += magnetic.fieldJacobian.transpose() * magnetic.momentWorld;
+    total.torque += magnetic.momentBody.cross(magnetic.BBody);
     return total;
 };
 
 
 /*
 Assembles the generalized forces for the EL equations. Potentials yield forces F=-grad(phi), 
-while electromagnetic fields use the full electromagnetic field Lagrangian to derive Lorenz forces:
+while electromagnetic fields use the full electromagnetic field Lagrangian to derive Lorentz forces:
 F_em = q * ((J^T(A) - J(A))*v - d_t A - grad(phi))
 The force and torque induced by a permanent and an induced magnetic moment are:
 F_dipole = grad(<mu, B>) = J(B)^T mu
-tau_dipole = - mu_body Ü B_body, B_body = R^T B
+tau_dipole = mu_body x B_body , B_body = R^T B
 */
 Wrench Solver::assembleLagrangianWrench(const State& s, double t) const {
     Wrench total;
@@ -135,15 +137,18 @@ Wrench Solver::assembleLagrangianWrench(const State& s, double t) const {
     for(const auto& field : system.gravityFields){
         total.force += system.body.mass * field->acceleration(s, t);
     }
+    vec3 gradPhi = vec3::Zero();
+    mat3 JA = mat3::Zero();
+    vec3 dAdt = vec3::Zero();
     for(const auto& field : system.emFields){
         const vec3 gradPhi = field->scalarPotentialGradient(s, t);
         const mat3 JA = field->vectorPotentialJacobian(s, t);
         const vec3 dAdt = field->vectorPotentialTimeDerivative(s, t);
-        total.force += system.body.charge * ((JA.transpose() - JA) * s.v - dAdt - gradPhi);
-        const MagneticResponse magnetic = calculateMagneticResponse(system, s, t);
-        total.force += magnetic.fieldJacobian.transpose() * magnetic.momentWorld;
-        total.torque += magnetic.momentBody.cross(magnetic.BBody);
     }
+    total.force += system.body.charge * ((JA.transpose() - JA) * s.v - dAdt - gradPhi);
+    const MagneticResponse magnetic = calculateMagneticResponse(system, s, t);
+    total.force += magnetic.fieldJacobian.transpose() * magnetic.momentWorld;
+    total.torque += magnetic.momentBody.cross(magnetic.BBody);
     return total;
 };
 
@@ -262,23 +267,33 @@ Diagnostics Solver::diagnostics(const State& s, double t) const{
     d.T_trans = 0.5 * system.body.mass * s.v.squaredNorm();
     d.T_rot = 0.5 * s.Omega.dot(system.body.inertia * s.Omega);
     for(const auto& potential : system.potentials){
-        d.U_generic += potential->value(system.body, s, t);
+        d.U_generic +=potential->value(system.body, s, t);
     }
-    for(const auto& field : system.gravityFields){
-        d.U_gr += system.body.mass * field->potential(s, t);
+    for(const auto& field : system.gravityFields){d.U_gr += system.body.mass* field->potential(s, t);
     }
-    d.mu_body = system.body.magneticMoment + system.body.magneticPolarizability * d.B_body;
-    d.mu_world = R * d.mu_body;
-    for(const auto& field : system.emFields){
+    double totalScalarPotential = 0.0;
+    for (const auto& field : system.emFields){
         d.E_world += field->electricField(s, t);
         d.B_world += field->magneticField(s, t);
-        d.U_em += system.body.charge * field->scalarPotential(s, t);
+        totalScalarPotential += field->scalarPotential(s, t);
     }
-    d.U_em -= d.mu_world.dot(d.B_world);
-    d.U_em -= 0.5 * d.B_body.dot(system.body.magneticPolarizability * d.B_body);
     d.E_body = R.transpose() * d.E_world;
     d.B_body = R.transpose() * d.B_world;
-    d.E_total = d.T_trans + d.T_rot + d.U_generic + d.U_gr + d.U_em;
+    d.mu_body = system.body.magneticMoment + system.body.magneticPolarizability * d.B_body;
+    d.mu_world = R * d.mu_body;
+    const double permanentMagneticEnergy = -system.body.magneticMoment.dot(d.B_body);
+    const double inducedMagneticEnergy = -0.5 * d.B_body.dot(system.body.magneticPolarizability * d.B_body);
+    d.U_em =
+        system.body.charge
+        * totalScalarPotential
+        + permanentMagneticEnergy
+        + inducedMagneticEnergy;
+    d.E_total =
+        d.T_trans
+        + d.T_rot
+        + d.U_generic
+        + d.U_gr
+        + d.U_em;
     d.constraintResidual = constraintResidual(s, t);
     d.quaternionNorm = s.q.norm();
     return d;

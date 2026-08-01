@@ -11,5 +11,5 @@ vec3 UniformGravity::acceleration(const State&, double) const {
 }
 
 double UniformGravity::potential(const State& state, double) const {
-    return g.dot(state.r);
+    return -g.dot(state.r);
 }

@@ -1,0 +1,26 @@
+# Showcase 2: magnetic dipole oscillation in a uniform field
+mass 1.0
+radius 0.25
+charge 0.0
+
+# Permanent body-fixed moment initially perpendicular to B.
+magneticMoment 1.0 0.0 0.0
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+
+# Spherical inertia gives a clean magnetic-pendulum motion.
+inertia 0.25 0 0  0 0.25 0  0 0 0.25
+
+position 0.0 0.0 0.0
+velocity 0.0 0.0 0.0
+omega 0.0 0.0 0.0
+quaternion 1.0 0.0 0.0 0.0
+
+solverMode dAlembert
+constraint none
+gravityType none
+emType uniform
+electricField 0.0 0.0 0.0
+magneticField 0.0 0.0 1.0
+
+dt 1e-3
+tEnd 15.0

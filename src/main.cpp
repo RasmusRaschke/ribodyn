@@ -96,7 +96,16 @@ void addElectromagnetism(MechanicalSystem& system, const Input& input){
         return;
     if(type == "uniform"){
         system.emFields.push_back(std::make_unique<UniformEMField>(input.getVec3("electricField"),input.getVec3("magneticField")));
-    return;
+        return;
+    }
+    if(type == "rotatingUniform"){
+        system.emFields.push_back(std::make_unique<RotatingUniformEMField>(
+            input.getVec3("initialMagneticField"), 
+            input.getVec3("fieldRotationAxis"), 
+            input.getDouble("fieldAngularFrequency"), 
+            input.getVec3("electricField")
+        ));
+        return;
     }
     throw std::runtime_error(
         "Unknown EM field type: " + type

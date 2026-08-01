@@ -49,3 +49,22 @@ class UniformEMField final : public ElectromagneticField {
     vec3 magneticField(const State& state, double t) const override;
     mat3 magneticFieldJacobian(const State& state, double t) const override;
 };
+
+class RotatingUniformEMField final : public ElectromagneticField{
+    private:
+        vec3 B0;
+        vec3 axis;
+        double omega;
+        vec3 E0;
+        vec3 magneticFieldTimeDerivative(double t) const;
+    public:
+        RotatingUniformEMField(const vec3& initialMagneticField, const vec3& rotationAxis, double angularFrequency, const vec3& uniformElectricField = vec3::Zero());
+        double scalarPotential(const State& state, double t) const override;
+        vec3 vectorPotential(const State& state, double t) const override;
+        vec3 scalarPotentialGradient(const State& state, double t) const override;
+        mat3 vectorPotentialJacobian(const State& state, double t) const override;
+        vec3 vectorPotentialTimeDerivative(const State& state, double t) const override;
+        vec3 electricField(const State& state, double t) const override;
+        vec3 magneticField(const State& state, double t) const override;
+        mat3 magneticFieldJacobian(const State& state, double t) const override;
+};

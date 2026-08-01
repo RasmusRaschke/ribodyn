@@ -1,0 +1,35 @@
+# Rotating magnetic-field showcase
+#
+# B(t) = Rot(e_z, omega_field t) B0
+#
+# The body starts with its permanent moment aligned with B0.
+# As the field rotates, the body lags, accelerates, and oscillates
+# relative to the externally imposed field direction.
+
+mass 1.0
+radius 0.30
+charge 0.0
+
+magneticMoment 1.0 0.0 0.0
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+
+# Spherical inertia for a clean rotational response.
+inertia 0.18 0 0  0 0.18 0  0 0 0.18
+
+position 0.0 0.0 0.0
+velocity 0.0 0.0 0.0
+omega 0.0 0.0 0.0
+quaternion 1.0 0.0 0.0 0.0
+
+solverMode lagrangian
+constraint none
+gravityType none
+
+emType rotatingUniform
+initialMagneticField 1.0 0.0 0.0
+fieldRotationAxis 0.0 0.0 1.0
+fieldAngularFrequency 0.65
+electricField 0.0 0.0 0.0
+
+dt 1e-3
+tEnd 15.0

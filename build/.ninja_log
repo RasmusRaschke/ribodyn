@@ -1,15 +1,14 @@
 # ninja log v7
-3	2413	1785583613150495297	CMakeFiles/solver.dir/src/io.cpp.o	6addda439c9b8e6d
-1	4470	1785500268823544936	CMakeFiles/solver.dir/src/main.cpp.o	79ee70a9c631f194
-4	3526	1785583613151236163	CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o	ec40cc9592cd8d77
-3	2540	1785583613150644997	CMakeFiles/solver.dir/src/utility.cpp.o	68dc3e2a558476f6
-3	9290	1785583613150779789	CMakeFiles/solver.dir/src/solver.cpp.o	175804fd265d11e2
-9301	9719	1785500278124455504	solver	7b1f8d3ac3230d25
+2	2740	1785588759738563237	CMakeFiles/solver.dir/src/io.cpp.o	33aa8da27b171b96
+2	4961	1785588759737163493	CMakeFiles/solver.dir/src/main.cpp.o	5ed581d5fae3eb0c
+3	3874	1785588759739506460	CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o	ea1e4e5c05718459
+2	2949	1785588759738748253	CMakeFiles/solver.dir/src/utility.cpp.o	902d9a79c97d5d8c
+2	10018	1785588759738914584	CMakeFiles/solver.dir/src/solver.cpp.o	4a2aaf1024b1d061
+10018	10495	1785588769754062917	solver	b871ec39833cd8f
 2	8	1785498613715081630	clean	7adf74806070bde8
-4	1700	1785583613151576168	CMakeFiles/solver.dir/systems/centralGravity.cpp.o	8119b5febc73228a
-3	2616	1785583613150916695	CMakeFiles/solver.dir/src/integrator.cpp.o	ce94dbd556b866b0
-4	1606	1785583613151401682	CMakeFiles/solver.dir/systems/uniformGravity.cpp.o	82de53e4a58bd1e6
-3	2648	1785583613151068990	CMakeFiles/solver.dir/src/emField.cpp.o	6a2d151daf7b5699
-4	2417	1785583613151752659	CMakeFiles/solver.dir/systems/uniformEMField.cpp.o	ed9830316431a99c
-1	3245	1785583713614867678	CMakeFiles/solver.dir/src/main.cpp.o	79ee70a9c631f194
-3246	3702	1785583716859837385	solver	7b1f8d3ac3230d25
+3	2701	1785588759739808345	CMakeFiles/solver.dir/systems/centralGravity.cpp.o	2f41714c653b9080
+2	2799	1785588759739082428	CMakeFiles/solver.dir/src/integrator.cpp.o	bf7821e7f6e220d0
+3	2533	1785588759739654738	CMakeFiles/solver.dir/systems/uniformGravity.cpp.o	bfa40a4ac6460e53
+3	2663	1785588759739286199	CMakeFiles/solver.dir/src/emField.cpp.o	dd69c492cd309d72
+3	2692	1785588759739947705	CMakeFiles/solver.dir/systems/uniformEMField.cpp.o	a9db2aa54397b663
+4	3223	1785588759740108636	CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o	9cde3ab6d9dce39
