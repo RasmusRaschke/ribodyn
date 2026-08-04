@@ -15,7 +15,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-import extractor as su
+import simutils as su
 
 
 def components(ax, t, data, names, labels, title, ylabel=None):

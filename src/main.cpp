@@ -75,7 +75,7 @@ void addDissipativeForces(MechanicalSystem& system, const Input& input){
     if(input.has("airType")){
         const std::string airType = input.getString("airType");
         if(airType == "sphere"){
-            system.forces.push_back(
+            system.nonConservativeForces.push_back(
                 std::make_unique<SphereAirResistance>(
                     input.getDouble("airDensity"),
                     input.getDouble("airDynamicViscosity"),
@@ -118,7 +118,7 @@ void addDissipativeForces(MechanicalSystem& system, const Input& input){
                 const vec3 gravity = input.getVec3("gravity");
                 normalLoad = std::max(0.0, -system.body.mass * gravity.dot(normal));
             }
-            system.forces.push_back(std::make_unique<RegularizedCoulombRollingResistance>(
+            system.nonConservativeForces.push_back(std::make_unique<RegularizedCoulombRollingResistance>(
                     input.getDouble("rollingFrictionCoefficient"),
                     normalLoad,
                     normal,
@@ -167,9 +167,32 @@ void addElectromagnetism(MechanicalSystem& system, const Input& input){
         ));
         return;
     }
-    throw std::runtime_error(
-        "Unknown EM field type: " + type
-    );
+
+    if(type == "magDipole"){
+        int dipoleCount = input.getDouble("dipoleCount");
+        if(dipoleCount < 1){
+            throw std::runtime_error("dipoleCount must be a positive integer.");
+        }
+        std::vector<FixedMagneticDipoleSource> sources;
+        sources.reserve(dipoleCount);
+        for(int i=1; i <= dipoleCount; ++i){
+                const std::string suffix = std::to_string(i);
+                FixedMagneticDipoleSource source;
+                source.position = input.getVec3("dipolePosition" + suffix);
+                source.moment = input.getVec3("dipoleMoment" + suffix);
+                sources.push_back(source);
+        }
+        system.emFields.push_back(
+            std::make_unique<FixedDipoleEMField>(
+            std::move(sources), 
+            input.getDouble("dipoleFieldScale"), 
+            input.getDouble("dipoleMinimumDistance")
+        ));
+        return;
+    }
+
+    throw std::runtime_error("Unknown EM field type: " + type);
+
 }
 }
 

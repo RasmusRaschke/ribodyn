@@ -1,0 +1,33 @@
+# =============================================================================
+# Free triaxial magnetic top
+# =============================================================================
+
+mass 1.0
+radius 0.30
+charge 0.0
+
+magneticMoment 0.70 0.10 0.20
+magneticPolarizability 0.35 0.08 0.02  0.08 0.18 -0.03  0.02 -0.03 0.10
+inertia 0.09 0.00 0.00  0.00 0.14 0.00  0.00 0.00 0.19
+
+position 0.0 0.0 0.0
+velocity 0.0 0.0 0.0
+
+omega 1.10 -0.70 3.50
+quaternion 0.9537169507482269 0.2126311099715939 0.2126311099715939 0
+
+solverMode dAlembert
+
+constraint none
+
+gravityType none
+
+emType uniform
+electricField 0.0 0.0 0.0
+magneticField 0.40 -0.20 0.90
+
+airType none
+rollingResistanceType none
+
+dt 0.001
+tEnd 12.0

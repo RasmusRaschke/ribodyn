@@ -20,8 +20,9 @@ CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
-//Choose the type of build, options are: None Debug Release RelWithDebInfo
-// MinSizeRel ...
+//Build type for single-configuration generators (Makefile Generators,
+// Ninja, etc.). Typical values: Debug, Release, RelWithDebInfo,
+// MinSizeRel; custom build types may also be defined.
 CMAKE_BUILD_TYPE:STRING=Debug
 
 //Full path to the compiler used for language <LANG>. Set by CMake

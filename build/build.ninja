@@ -166,6 +166,15 @@ build CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o: C
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
+build CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target solver
@@ -174,7 +183,7 @@ build CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o: C
 #############################################
 # Link the executable solver
 
-build solver: CXX_EXECUTABLE_LINKER__solver_Debug CMakeFiles/solver.dir/src/main.cpp.o CMakeFiles/solver.dir/src/io.cpp.o CMakeFiles/solver.dir/src/utility.cpp.o CMakeFiles/solver.dir/src/solver.cpp.o CMakeFiles/solver.dir/src/integrator.cpp.o CMakeFiles/solver.dir/src/emField.cpp.o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o CMakeFiles/solver.dir/systems/centralGravity.cpp.o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o
+build solver: CXX_EXECUTABLE_LINKER__solver_Debug CMakeFiles/solver.dir/src/main.cpp.o CMakeFiles/solver.dir/src/io.cpp.o CMakeFiles/solver.dir/src/utility.cpp.o CMakeFiles/solver.dir/src/solver.cpp.o CMakeFiles/solver.dir/src/integrator.cpp.o CMakeFiles/solver.dir/src/emField.cpp.o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o CMakeFiles/solver.dir/systems/centralGravity.cpp.o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o
   CONFIG = Debug
   DEP_FILE = CMakeFiles/solver.dir/link.d
   FLAGS = -g

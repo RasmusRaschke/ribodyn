@@ -4,7 +4,7 @@ This repository contains a C++ program to calculate the equations of motion for 
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build -j
 ```
-After that, you need to prepare an input file or use one of the examples in [example/input](example/input). The general convention is that vectors are read in from head to tail and matrices are read in from up left to down right. The program is then called as ```./build/solver < path/to/input.in```. The output is written as CSV file in the [build](build/) directory. 
+After that, you need to prepare an input file or use one of the examples in [example/input](example/input). The general convention is that vectors are read in from head to tail and matrices are read in from up left to down right. The program is then called as ```./build/solver path/to/input.in```. The output is written as CSV file in the [build](build/) directory. 
 
 ## Sources
 The program directly implements the theoretical method outlined in 1.3 of [Nonholonomic Mechanics and Control](https://link.springer.com/book/10.1007/978-1-4939-3017-3) by Bloch et al. using a Runge-Kutta-Munthe-Kaas 4 algorithm. The program has two solver modes: Lagrange mode uses conservative potentials to calculate and solve the Euler-Lagrange equations, while d'Alembert mode works with generalized forces directly, hence also allows for easy implementation of non-conservative forces. In general: If you have non-conservative forces, d'Alembert is less of a pain to deal with since not all non-conservative forces can be derived as Rayleigh dissipation. 

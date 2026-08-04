@@ -1,0 +1,40 @@
+# =============================================================================
+# Internally asymmetric magnetic sphere rolling on an incline
+# =============================================================================
+
+mass 1.20
+radius 0.18
+charge 0.0
+
+magneticMoment 0.35 -0.25 0.15
+magneticPolarizability 0.20 -0.04 0.03  -0.04 0.32 0.06  0.03 0.06 0.14
+inertia 0.014 0.000 0.000  0.000 0.020 0.000  0.000 0.000 0.026
+
+position 0 -0.03742410434719668 0.176066568132085
+velocity 0.0 0.0 0.0
+
+# Initial spin is parallel to the plane normal and therefore satisfies
+# v + radius * n x (R Omega) = 0 with v=0 and q=identity.
+omega 0 -0.8316467632710374 3.912590402935223
+
+quaternion 1.0 0.0 0.0 0.0
+
+solverMode lagrangian
+
+constraint rolling
+normal 0 -0.2079116908177593 0.9781476007338057
+
+gravityType uniform
+gravity 0.0 0.0 -9.81
+
+emType rotatingUniform
+initialMagneticField 0.75 0.10 0.25
+fieldRotationAxis 0.0 0.0 1.0
+fieldAngularFrequency 0.55
+electricField 0.0 0.0 0.0
+
+airType none
+rollingResistanceType none
+
+dt 0.001
+tEnd 12.0

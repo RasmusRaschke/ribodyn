@@ -106,3 +106,30 @@ class RegularizedCoulombRollingResistance final : public Force{
         );
         Wrench evaluate(const Body& body, const State& state, double t) const override;
 };
+
+struct FixedMagneticDipoleSource{
+    vec3 position = vec3::Zero();
+    vec3 moment = vec3::Zero();
+};
+
+class FixedDipoleEMField final : public ElectromagneticField{
+    private:
+        std::vector<FixedMagneticDipoleSource> sources;
+        double scale;
+        double minimumRadius;
+        void validateDistance(const vec3& displacement) const;
+    public:
+        FixedDipoleEMField(
+            std::vector<FixedMagneticDipoleSource> source,
+            double fieldScale,
+            double minimumDistance
+        );
+        double scalarPotential(const State& state, double t) const override;
+        vec3 scalarPotentialGradient(const State& state, double t) const override;
+        vec3 vectorPotential(const State& state, double t) const override;
+        mat3 vectorPotentialJacobian(const State& state, double t) const override;
+        vec3 vectorPotentialTimeDerivative(const State& state, double t) const override;
+        vec3 electricField(const State& state, double t) const override;
+        vec3 magneticField(const State& state, double t) const override;
+        mat3 magneticFieldJacobian(const State& state, double t) const override;
+};

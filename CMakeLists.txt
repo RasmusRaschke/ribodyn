@@ -25,6 +25,7 @@ add_executable(
     systems/rotatingUniformEMField.cpp
     systems/sphereAirResistance.cpp
     systems/regularizedCoulombRollingResistance.cpp
+    systems/fixedDipoleEMField.cpp
 )
 
 target_link_libraries(
