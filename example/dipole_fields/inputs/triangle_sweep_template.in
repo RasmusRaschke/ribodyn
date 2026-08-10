@@ -29,9 +29,9 @@ emType magDipole
 dipoleCount 3
 
 # Equilateral triangle of circumradius 1.0, located 0.35 below the plane.
-dipolePosition1 0.1050, 0.0000, 0.0050
-dipolePosition2 -0.0525, 0.0909326674, 0.0050
-dipolePosition3 -0.0525, -0.0909326674, 0.0050
+dipolePosition1 0.1050 0.0000 0.0050
+dipolePosition2 -0.0525 0.0909326674 0.0050
+dipolePosition3 -0.0525 -0.0909326674 0.0050
 
 # All source dipoles point upward.
 dipoleMoment1 0.0 0.0 1.0

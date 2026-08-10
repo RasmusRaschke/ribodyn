@@ -82,5 +82,11 @@
   "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o -c /home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o"
 }
 ]

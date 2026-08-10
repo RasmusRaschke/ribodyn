@@ -176,6 +176,26 @@ normalLoad 9.66096405704976
 # rollingResistanceType none
 # ----------------------------
 
+# -----------------------------------------------------------------------------
+# Viscous Eddy Current Damping
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     sphere
+#     viscous
+
+eddyCurrentType sphere
+eddyCurrentConductivity 6e7
+eddyCurrentTimeStep 1e-6
+
+### Alternatives: ###
+# ----------------------------
+# eddyCurrentType viscous
+# translationalDamping 0.1
+# rotationalDamping 0.1
+# ----------------------------
+
 
 # -----------------------------------------------------------------------------
 # Integration interval

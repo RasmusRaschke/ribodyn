@@ -26,6 +26,7 @@ add_executable(
     systems/sphereAirResistance.cpp
     systems/regularizedCoulombRollingResistance.cpp
     systems/fixedDipoleEMField.cpp
+    systems/eddyCurrentDamping.cpp
 )
 
 target_link_libraries(

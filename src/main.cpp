@@ -192,7 +192,25 @@ void addElectromagnetism(MechanicalSystem& system, const Input& input){
     }
 
     throw std::runtime_error("Unknown EM field type: " + type);
+}
 
+void addEddyCurrentDamping(MechanicalSystem& system, const Input& input){
+    const std::string type = input.getString("eddyCurrentType");
+    if(type=="none")
+        return;
+    if(type=="sphere"){
+        const double conductivity = input.getDouble("eddyCurrentConductivity");
+        const double timeStep = input.has("eddyCurrentTimeStep") ? input.getDouble("eddyCurrentTimeStep") : 1e-6;
+        system.nonConservativeForces.push_back(std::make_unique<SphereEddyCurrentDamping>(conductivity, system.emFields, timeStep));
+        return;
+    }
+    if(type=="viscous"){
+        const double translationalDamping = input.getDouble("eddyCurrentTranslationalDamping");
+        const double rotationalDamping = input.getDouble("eddyCurrentRotationalDamping");
+        system.nonConservativeForces.push_back(std::make_unique<ViscousEddyCurrentDamping>(translationalDamping, rotationalDamping));
+        return;
+    }
+    throw std::runtime_error("Unknown Eddy current type: " + type);
 }
 }
 
@@ -224,6 +242,7 @@ int main(int argc, char* argv[]){
         addGravity(system, input);
         addElectromagnetism(system, input);
         addDissipativeForces(system, input);
+        addEddyCurrentDamping(system, input);
         State state;
         state.r = input.getVec3("position");
         state.v = input.getVec3("velocity");

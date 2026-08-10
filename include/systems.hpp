@@ -133,3 +133,29 @@ class FixedDipoleEMField final : public ElectromagneticField{
         vec3 magneticField(const State& state, double t) const override;
         mat3 magneticFieldJacobian(const State& state, double t) const override;
 };
+
+class SphereEddyCurrentDamping final : public Force{
+    private:
+        double conductivity;
+        double timeStep;
+        std::vector<const ElectromagneticField*> fields;
+    public:
+        SphereEddyCurrentDamping(
+            double conductivity,
+            const std::vector<std::unique_ptr<ElectromagneticField>>& emFields,
+            double timeStep = 1e-6
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};
+
+class ViscousEddyCurrentDamping final : public Force{
+    private:
+        double translationalDamping;
+        double rotationalDamping;
+    public:
+        ViscousEddyCurrentDamping(
+            double translationalDamping,
+            double rotationalDamping
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};
