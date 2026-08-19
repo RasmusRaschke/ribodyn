@@ -27,6 +27,14 @@ add_executable(
     systems/regularizedCoulombRollingResistance.cpp
     systems/fixedDipoleEMField.cpp
     systems/eddyCurrentDamping.cpp
+    systems/fixedMonopoleEMField.cpp
+    systems/uniformMagneticField.cpp
+    systems/normalContactConstraint.cpp
+    systems/kalkerLinearContact.cpp
+    systems/pointContactConstraint.cpp
+    systems/pointContactFriction.cpp
+
+    
 )
 
 target_link_libraries(

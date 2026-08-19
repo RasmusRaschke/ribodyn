@@ -1,92 +1,128 @@
 [
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/main.cpp.o -c /home/lyserg/Documents/ribodyn/src/main.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/src/main.cpp.o -c /home/lyserg/Documents/ribodyn/src/main.cpp",
   "file": "/home/lyserg/Documents/ribodyn/src/main.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/main.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/io.cpp.o -c /home/lyserg/Documents/ribodyn/src/io.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/src/io.cpp.o -c /home/lyserg/Documents/ribodyn/src/io.cpp",
   "file": "/home/lyserg/Documents/ribodyn/src/io.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/io.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/utility.cpp.o -c /home/lyserg/Documents/ribodyn/src/utility.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/src/utility.cpp.o -c /home/lyserg/Documents/ribodyn/src/utility.cpp",
   "file": "/home/lyserg/Documents/ribodyn/src/utility.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/utility.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/lyserg/Documents/ribodyn/src/solver.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/lyserg/Documents/ribodyn/src/solver.cpp",
   "file": "/home/lyserg/Documents/ribodyn/src/solver.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/solver.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/integrator.cpp.o -c /home/lyserg/Documents/ribodyn/src/integrator.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/src/integrator.cpp.o -c /home/lyserg/Documents/ribodyn/src/integrator.cpp",
   "file": "/home/lyserg/Documents/ribodyn/src/integrator.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/integrator.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/src/emField.cpp.o -c /home/lyserg/Documents/ribodyn/src/emField.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/src/emField.cpp.o -c /home/lyserg/Documents/ribodyn/src/emField.cpp",
   "file": "/home/lyserg/Documents/ribodyn/src/emField.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/src/emField.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/uniformGravity.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/centralGravity.cpp.o -c /home/lyserg/Documents/ribodyn/systems/centralGravity.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/centralGravity.cpp.o -c /home/lyserg/Documents/ribodyn/systems/centralGravity.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/centralGravity.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/centralGravity.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/uniformEMField.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o -c /home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o -c /home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o -c /home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o -c /home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o"
 },
 {
   "directory": "/home/lyserg/Documents/ribodyn/build",
-  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -g -std=gnu++20 -o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o -c /home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o -c /home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/fixedMonopoleEMField.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/fixedMonopoleEMField.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/uniformMagneticField.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/uniformMagneticField.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o -c /home/lyserg/Documents/ribodyn/systems/normalContactConstraint.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/normalContactConstraint.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/kalkerLinearContact.cpp.o -c /home/lyserg/Documents/ribodyn/systems/kalkerLinearContact.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/kalkerLinearContact.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/kalkerLinearContact.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o -c /home/lyserg/Documents/ribodyn/systems/pointContactConstraint.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/pointContactConstraint.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o -c /home/lyserg/Documents/ribodyn/systems/pointContactFriction.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/pointContactFriction.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o"
 }
 ]

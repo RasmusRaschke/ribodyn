@@ -2,6 +2,7 @@
 #include "types.hpp"
 #include "structures.hpp"
 #include <functional>
+#include <vector>
 
 class RollingConstraint final : public Constraint{
     public:
@@ -107,9 +108,118 @@ class RegularizedCoulombRollingResistance final : public Force{
         Wrench evaluate(const Body& body, const State& state, double t) const override;
 };
 
+class NormalContactConstraint final : public Constraint{
+    private:
+        vec3 normal;
+        vec3 surfaceVelocity;
+    public:
+        NormalContactConstraint(const vec3& normal, const vec3& surfaceVelocity);
+        ConstraintData evaluate(const State& state, double t) const override;
+};
+
+class KalkerLinearContact final : public Force{
+    private:
+        vec3 normal;
+        vec3 surfaceVelocity;
+        double shearModulus;
+        double semiAxisA;
+        double semiAxisB;
+        double c11;
+        double c22;
+        double c23;
+        double c33;
+    public:
+        KalkerLinearContact(
+        const vec3& normal,
+        const vec3& surfaceVelocity,
+        double shearModulus,
+        double semiAxisA,
+        double semiAxisB,
+        double c11,
+        double c22,
+        double c23,
+        double c33
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};
+
+class PointContactConstraint final : public Constraint{
+    private:
+        vec3 contactPointBody;
+        vec3 normal;
+        vec3 surfaceVelocity;
+    public:
+        PointContactConstraint(
+            const vec3& contactPointBody,
+            const vec3& normal,
+            const vec3& surfaceVelocity
+        );
+        ConstraintData evaluate(const State& state, double t) const override;
+};
+
+
+class PointContactViscousFriction final : public Force{
+    private:
+        vec3 contactPointBody;
+        vec3 normal;
+        vec3 surfaceVelocity;
+        double tangentialDamping;
+    public:
+        PointContactViscousFriction(
+            const vec3& contactPointBody,
+            const vec3& normal,
+            const vec3& surfaceVelocity,
+            double tangentialDamping
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};
+
+class PointContactDryFriction final : public Force{
+    private:
+        vec3 contactPointBody;
+        vec3 normal;
+        vec3 surfaceVelocity;
+        double frictionCoefficient;
+        double normalLoad;
+        double smoothingSpeed;
+    public:
+        PointContactDryFriction(
+            const vec3& contactPointBody,
+            const vec3& normal,
+            const vec3& surfaceVelocity,
+            double frictionCoefficient,
+            double normalLoad,
+            double smoothingSpeed
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+};
+
 struct FixedMagneticDipoleSource{
     vec3 position = vec3::Zero();
     vec3 moment = vec3::Zero();
+};
+
+class FixedMonopoleEMField final : public ElectromagneticField{
+    private:
+        std::vector<vec3> positions;
+        std::vector<double> charges;
+        double fieldScale;
+        double minimumDistance;
+    public:
+        FixedMonopoleEMField(
+            std::vector<vec3> positions,
+            std::vector<double> charges,
+            double fieldScale,
+            double minimumDistance
+        );
+        double scalarPotential(const State& state, double t) const override;
+        vec3 scalarPotentialGradient(const State& state, double t) const override;
+        vec3 vectorPotential(const State& state, double t) const override;
+        mat3 vectorPotentialJacobian(const State& state, double t) const override;
+        vec3 vectorPotentialTimeDerivative(const State& state, double t) const override;
+        vec3 electricField(const State& state, double t) const override;
+        vec3 magneticField(const State& state, double t) const override;
+        mat3 magneticFieldJacobian(const State& state, double t) const override;
 };
 
 class FixedDipoleEMField final : public ElectromagneticField{
@@ -124,6 +234,21 @@ class FixedDipoleEMField final : public ElectromagneticField{
             double fieldScale,
             double minimumDistance
         );
+        double scalarPotential(const State& state, double t) const override;
+        vec3 scalarPotentialGradient(const State& state, double t) const override;
+        vec3 vectorPotential(const State& state, double t) const override;
+        mat3 vectorPotentialJacobian(const State& state, double t) const override;
+        vec3 vectorPotentialTimeDerivative(const State& state, double t) const override;
+        vec3 electricField(const State& state, double t) const override;
+        vec3 magneticField(const State& state, double t) const override;
+        mat3 magneticFieldJacobian(const State& state, double t) const override;
+};
+
+class UniformMagneticField final : public ElectromagneticField{
+    private:
+        vec3 B0;
+    public:
+        explicit UniformMagneticField(const vec3& magneticField);
         double scalarPotential(const State& state, double t) const override;
         vec3 scalarPotentialGradient(const State& state, double t) const override;
         vec3 vectorPotential(const State& state, double t) const override;

@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: NonholonomicSolver
-# Configurations: Debug
+# Configurations: Release
 # =============================================================================
 
 #############################################
@@ -24,7 +24,7 @@ ninja_required_version = 1.5
 #############################################
 # Set configuration variable for custom commands.
 
-CONFIGURATION = Debug
+CONFIGURATION = Release
 # =============================================================================
 # Include auxiliary files.
 
@@ -49,136 +49,190 @@ cmake_ninja_workdir = /home/lyserg/Documents/ribodyn/build/
 
 build cmake_object_order_depends_target_solver: phony || .
 
-build CMakeFiles/solver.dir/src/main.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/src/main.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/src/main.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/src/main.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/src/main.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/src/io.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/src/io.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/src/io.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/src/io.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/src/io.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/src/utility.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/src/utility.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/src/utility.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/src/utility.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/src/utility.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/src/solver.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/src/solver.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/src/solver.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/src/solver.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/src/solver.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/src/integrator.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/src/integrator.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/src/integrator.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/src/integrator.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/src/integrator.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/src/emField.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/src/emField.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/src/emField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/src/emField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/src/emField.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/rollingConstraint.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/uniformGravity.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/uniformGravity.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/uniformGravity.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/uniformGravity.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/centralGravity.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/centralGravity.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/centralGravity.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/centralGravity.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/centralGravity.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/uniformEMField.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/uniformEMField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/uniformEMField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/uniformEMField.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/rotatingUniformEMField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/sphereAirResistance.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/regularizedCoulombRollingResistance.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/fixedDipoleEMField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
-build CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o: CXX_COMPILER__solver_unscanned_Debug /home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp || cmake_object_order_depends_target_solver
-  CONFIG = Debug
+build CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/eddyCurrentDamping.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/fixedMonopoleEMField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/uniformMagneticField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/normalContactConstraint.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/kalkerLinearContact.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/kalkerLinearContact.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/kalkerLinearContact.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/pointContactConstraint.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/pointContactFriction.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
   INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/solver.dir
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
@@ -192,10 +246,10 @@ build CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o: CXX_COMPILER__solv
 #############################################
 # Link the executable solver
 
-build solver: CXX_EXECUTABLE_LINKER__solver_Debug CMakeFiles/solver.dir/src/main.cpp.o CMakeFiles/solver.dir/src/io.cpp.o CMakeFiles/solver.dir/src/utility.cpp.o CMakeFiles/solver.dir/src/solver.cpp.o CMakeFiles/solver.dir/src/integrator.cpp.o CMakeFiles/solver.dir/src/emField.cpp.o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o CMakeFiles/solver.dir/systems/centralGravity.cpp.o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o
-  CONFIG = Debug
+build solver: CXX_EXECUTABLE_LINKER__solver_Release CMakeFiles/solver.dir/src/main.cpp.o CMakeFiles/solver.dir/src/io.cpp.o CMakeFiles/solver.dir/src/utility.cpp.o CMakeFiles/solver.dir/src/solver.cpp.o CMakeFiles/solver.dir/src/integrator.cpp.o CMakeFiles/solver.dir/src/emField.cpp.o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o CMakeFiles/solver.dir/systems/centralGravity.cpp.o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o CMakeFiles/solver.dir/systems/kalkerLinearContact.cpp.o CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o
+  CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/link.d
-  FLAGS = -g
+  FLAGS = -O3 -DNDEBUG
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/solver.dir/link.d
   OBJECT_DIR = CMakeFiles/solver.dir
   POST_BUILD = :
@@ -248,14 +302,14 @@ build all: phony solver
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja /home/lyserg/Documents/ribodyn/build/cmake_install.cmake: RERUN_CMAKE | /home/lyserg/Documents/ribodyn/CMakeLists.txt /usr/share/cmake/Modules/CMakeCInformation.cmake /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-C.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Linker/GNU-C.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.1/CMakeCCompiler.cmake CMakeFiles/4.4.1/CMakeCXXCompiler.cmake CMakeFiles/4.4.1/CMakeSystem.cmake
+build build.ninja /home/lyserg/Documents/ribodyn/build/cmake_install.cmake: RERUN_CMAKE | /home/lyserg/Documents/ribodyn/CMakeLists.txt /usr/share/cmake/Modules/CMakeCInformation.cmake /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-C.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Linker/GNU-C.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.2/CMakeCCompiler.cmake CMakeFiles/4.4.2/CMakeCXXCompiler.cmake CMakeFiles/4.4.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/lyserg/Documents/ribodyn/CMakeLists.txt /usr/share/cmake/Modules/CMakeCInformation.cmake /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-C.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Linker/GNU-C.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.1/CMakeCCompiler.cmake CMakeFiles/4.4.1/CMakeCXXCompiler.cmake CMakeFiles/4.4.1/CMakeSystem.cmake: phony
+build /home/lyserg/Documents/ribodyn/CMakeLists.txt /usr/share/cmake/Modules/CMakeCInformation.cmake /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-C.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Linker/GNU-C.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.2/CMakeCCompiler.cmake CMakeFiles/4.4.2/CMakeCXXCompiler.cmake CMakeFiles/4.4.2/CMakeSystem.cmake: phony
 
 
 #############################################

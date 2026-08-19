@@ -64,11 +64,19 @@ solverMode lagrangian
 # Allowed values:
 #     none
 #     rolling
+#     normalContact
+
 constraint rolling
 
 # Fixed INERTIAL-frame plane normal. The angle of the incline is determined by
 # the normal alone. It does not have to be normalized.
 normal 0 -0.1736481776669303 0.984807753012208
+
+### Alternatives: ###
+#-----------------------------
+# constraint normalContact
+# surfaceVelocity vs_x vs_y vs_z
+# ----------------------------
 
 
 # -----------------------------------------------------------------------------
@@ -100,6 +108,9 @@ gravity 0.0 0.0 -9.81
 #     none
 #     uniform
 #     rotatingUniform
+#     electricMonopole
+#     magneticDipole
+#     uniformMagnetic
 
 emType rotatingUniform
 
@@ -116,10 +127,34 @@ electricField 0.0 0.0 0.0
 ### Alternatives: ###
 # ----------------------------
 # emType uniform
-# electricField 0.2 0.0 0.0
-# magneticField 0.0 0.0 0.8
+# electricField E_x E_y E_z
+# magneticField B_x B_y B_z
 # ----------------------------
 # emType none
+# ----------------------------
+# emType electricMonopole
+# monopoleCount N
+# monopolePosition1 x1 y1 z1
+# monopoleCharge1 q1
+# ...
+# monopolePositionN xN yN zN
+# monopoleChargeN qN
+# monopoleFieldScale 8.9875517923e9 (SI units)
+# monopoleMinimumDistance 0.001
+# ----------------------------
+# emType magneticDipole
+# dipoleCount N
+# dipolePosition1 x1 y1 z1
+# dipoleMoment1 mu1_x mu1_y mu1_z
+# ...
+# dipolePositionN xN yN zN
+# dipoleMomentN muN_x muN_y muN_z
+# dipoleFieldScale 1.0e-7 (SI units)
+# dipoleMinimumDistance 0.001
+# ----------------------------
+# emType uniformMagnetic
+# magneticField B_x B_y B_z
+
 
 
 # -----------------------------------------------------------------------------
@@ -145,6 +180,39 @@ airAngularVelocity 0.0 0.0 0.0
 # ----------------------------
 # airType none
 # ----------------------------
+
+# -----------------------------------------------------------------------------
+# Contact Friction
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     viscousPoint
+#     dryPoint
+
+contactFrictionType viscousPoint
+contactTangentialDamping 0.03
+#Contact point of the tip relative to COM in BODY coordinates
+contactPointBody 0.0 0.0 -0.0375 
+
+### Alternatives: ###
+# ----------------------------
+# contactFrictionType dryPoint
+# contactFrictionCoefficient 0.3
+# contactNormalLoad 0.1932192811409952 (N=mg*cos(phi))
+# contactFrictionSmoothingSpeed 0.01
+# ----------------------------
+
+airType sphere
+airDensity 1.225
+# Set to zero to disable the linear Stokes terms.
+airDynamicViscosity 1.81e-5
+airDragCoefficient 0.47
+# Set to zero to disable quadratic rotational air resistance.
+airRotationalDragCoefficient 0.20
+# Inertial-frame ambient-air velocities.
+airVelocity 0.0 0.0 0.0
+airAngularVelocity 0.0 0.0 0.0
 
 # -----------------------------------------------------------------------------
 # Regularized Coulomb rolling resistance
@@ -177,6 +245,28 @@ normalLoad 9.66096405704976
 # ----------------------------
 
 # -----------------------------------------------------------------------------
+# Kalker Linear Contact Friction
+# CAUTION: Kalker assumes that the initial velocity is non-zero, so you 
+# have to enter some non-zero (and also not too small) starting velocity
+# and also the translated rotational velocity under the Kalker model
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     kalkerLinear
+#     IF USING KALKER: Set constraint mode to normalContact!
+
+contactFrictionType kalkerLinear
+contactShearModulus 8.08e10
+contactSemiAxisA 2.327e-5
+contactSemiAxisB 2.327e-5
+contactC11 4.12
+contactC22 3.67
+contactC23 1.47
+contactC33 1.19
+
+
+# -----------------------------------------------------------------------------
 # Viscous Eddy Current Damping
 # -----------------------------------------------------------------------------
 
@@ -202,5 +292,5 @@ eddyCurrentTimeStep 1e-6
 # -----------------------------------------------------------------------------
 #Compared to magsphere, the improved RKMK4 should allow for larger increments
 
-dt 1e-3
+dt 1e-5
 tEnd 10.0
