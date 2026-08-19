@@ -1,191 +1,294 @@
-#!/usr/bin/env python3
-"""Overview plots for ribodyn CSV output.
-Made with help of generative AI.
-Usage
------
-python3 overview_full.py output.csv
-python3 overview_full.py output.csv --save overview.png
-"""
-
-from __future__ import annotations
-
-import argparse
-from pathlib import Path
-
-import matplotlib.pyplot as plt
 import numpy as np
-
+import matplotlib.pyplot as plt
+from pathlib import Path
 import simutils as su
 
 
-def components(ax, t, data, names, labels, title, ylabel=None):
+# =============================================================================
+# Input
+# =============================================================================
+
+input_file = Path("output.csv")
+#output_file = None
+output_file = "overview.pdf"
+
+plots = [
+    "trajectory",
+    "position",
+    "omega",
+    "energy"
+]
+
+# Available:
+# "trajectory"
+# "position"
+# "velocity"
+# "omega"
+# "quaternion"
+# "kinetic"
+# "potential"
+# "energy"
+# "energy_drift"
+# "E_world"
+# "E_body"
+# "B_world"
+# "B_body"
+# "mu"
+# "numerics"
+
+ncols = 2
+
+
+# =============================================================================
+# Plot style
+# =============================================================================
+
+plt.style.use("seaborn-v0_8-paper")
+plt.rcParams.update({
+    "text.usetex": True,
+    "text.latex.preamble": r"\usepackage{siunitx} \usepackage{bm}",
+    "font.size": 18,
+    "axes.titlesize": 18,
+    "axes.labelsize": 18,
+    "xtick.labelsize": 16,
+    "ytick.labelsize": 16,
+    "legend.fontsize": 14,
+})
+
+
+# =============================================================================
+# Data
+# =============================================================================
+
+datasets = su.extract(input_file)
+data = datasets[input_file.stem]
+
+t = np.asarray(data.t)
+
+energy = np.asarray(data.E_total)
+energy_scale = max(abs(float(energy[0])), 1.0e-30)
+energy_drift = (energy - energy[0]) / energy_scale
+
+constraint_residual = np.maximum(
+    np.abs(np.asarray(data.constraint_residual)),
+    1.0e-18,
+)
+
+quaternion_error = np.maximum(
+    np.abs(np.asarray(data.quaternion_norm) - 1.0),
+    1.0e-18,
+)
+
+
+# =============================================================================
+# Helpers
+# =============================================================================
+
+def components(ax, names, labels, ylabel=None):
     for name, label in zip(names, labels):
-        ax.plot(t, np.asarray(getattr(data, name)), label=label)
-    ax.set_title(title)
-    ax.set_xlabel(r"$t\,[\mathrm{s}]$")
-    if ylabel:
+        ax.plot(
+            t,
+            np.asarray(getattr(data, name)),
+            label=label,
+        )
+
+    ax.set_xlabel(r"$t\, [\unit{s}]$")
+
+    if ylabel is not None:
         ax.set_ylabel(ylabel)
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Plot ribodyn simulation diagnostics.")
-    parser.add_argument("csv", nargs="?", default="output.csv", help="CSV output file")
-    parser.add_argument("--save", type=Path, help="Save the figure instead of only displaying it")
-    args = parser.parse_args()
+# =============================================================================
+# Plots
+# =============================================================================
 
-    csv_path = Path(args.csv)
-    datasets = su.extract(csv_path)
-    try:
-        data = datasets[csv_path.stem]
-    except KeyError as exc:
-        raise RuntimeError(f"Could not load dataset '{csv_path.stem}' from {csv_path}") from exc
+nrows = int(np.ceil(len(plots) / ncols))
 
-    t = np.asarray(data.t)
-    energy = np.asarray(data.E_total)
-    energy_scale = max(abs(float(energy[0])), 1.0e-30)
-    relative_energy_drift = (energy - energy[0]) / energy_scale
+fig, axs = plt.subplots(
+    nrows,
+    ncols,
+    figsize=(7.0 * ncols, 5.0 * nrows),
+    layout="constrained",
+)
 
-    constraint_residual = np.maximum(
-        np.abs(np.asarray(data.constraint_residual)), 1.0e-18
-    )
-    quaternion_error = np.maximum(
-        np.abs(np.asarray(data.quaternion_norm) - 1.0), 1.0e-18
-    )
+axs = np.atleast_1d(axs).ravel()
 
-    plt.style.use("seaborn-v0_8-paper")
-    fig, axs = plt.subplots(5, 3, figsize=(16, 18), constrained_layout=True)
+for ax, plot in zip(axs, plots):
 
-    components(
-        axs[0, 0], t, data,
-        ("x", "y", "z"),
-        (r"$x$", r"$y$", r"$z$"),
-        "COM position",
-        r"$[\mathrm{m}]$",
-    )
+    if plot == "trajectory":
+        ax.plot(data.x, data.y)
+        ax.set_xlabel(r"$x\, [\unit{m}]$")
+        ax.set_ylabel(r"$y\, [\unit{m}]$")
+        ax.set_title(r"$\textrm{trajectory}$")
+        ax.axis("equal")
 
-    axs[0, 1].plot(data.x, data.y)
-    axs[0, 1].set_title("Planar Projection")
-    axs[0, 1].set_xlabel(r"$x\,[\mathrm{m}]$")
-    axs[0, 1].set_ylabel(r"$y\,[\mathrm{m}]$")
-    axs[0, 1].axis("equal")
+    elif plot == "position":
+        components(
+            ax,
+            ("x", "y", "z"),
+            (r"$x$", r"$y$", r"$z$"),
+            r"$[\unit{m}]$",
+        )
+        ax.set_title(r"$\textrm{position}$")
 
-    components(
-        axs[0, 2], t, data,
-        ("vx", "vy", "vz"),
-        (r"$v_x$", r"$v_y$", r"$v_z$"),
-        "COM velocity",
-        r"$[\mathrm{m\,s^{-1}}]$",
-    )
+    elif plot == "velocity":
+        components(
+            ax,
+            ("vx", "vy", "vz"),
+            (r"$v_x$", r"$v_y$", r"$v_z$"),
+            r"$[\unit{m.s^{-1}}]$",
+        )
+        ax.set_title(r"$\textrm{velocity}$")
 
-    components(
-        axs[1, 0], t, data,
-        ("Ox", "Oy", "Oz"),
-        (r"$\Omega_x$", r"$\Omega_y$", r"$\Omega_z$"),
-        "Body angular velocity",
-        r"$[\mathrm{s^{-1}}]$",
-    )
+    elif plot == "omega":
+        components(
+            ax,
+            ("Ox", "Oy", "Oz"),
+            (r"$\Omega_x$", r"$\Omega_y$", r"$\Omega_z$"),
+            r"$[\unit{s^{-1}}]$",
+        )
+        ax.set_title(r"$\textrm{angular velocity}$")
 
-    components(
-        axs[1, 1], t, data,
-        ("qw", "qx", "qy", "qz"),
-        (r"$q_w$", r"$q_x$", r"$q_y$", r"$q_z$"),
-        "Orientation quaternion",
-    )
+    elif plot == "quaternion":
+        components(
+            ax,
+            ("qw", "qx", "qy", "qz"),
+            (r"$q_w$", r"$q_x$", r"$q_y$", r"$q_z$"),
+        )
+        ax.set_title(r"$\textrm{quaternion}$")
 
-    components(
-        axs[1, 2], t, data,
-        ("T_trans", "T_rot"),
-        (r"$T_{\mathrm{trans}}$", r"$T_{\mathrm{rot}}$"),
-        "Kinetic energies",
-        r"$[\mathrm{J}]$",
-    )
+    elif plot == "kinetic":
+        components(
+            ax,
+            ("T_trans", "T_rot"),
+            (r"$T_{\mathrm{trans}}$", r"$T_{\mathrm{rot}}$"),
+            r"$[\unit{J}]$",
+        )
+        ax.set_title(r"$\textrm{kinetic energy}$")
 
-    components(
-        axs[2, 0], t, data,
-        ("U_generic", "U_gr", "U_em"),
-        (r"$U_{\mathrm{gen}}$", r"$U_{\mathrm{gr}}$", r"$U_{\mathrm{em}}$"),
-        "Potential-energy contributions",
-        r"$[\mathrm{J}]$",
-    )
+    elif plot == "potential":
+        components(
+            ax,
+            ("U_generic", "U_gr", "U_em"),
+            (r"$U_{\mathrm{gen}}$", r"$U_{\mathrm{gr}}$", r"$U_{\mathrm{em}}$"),
+            r"$[\unit{J}]$",
+        )
+        ax.set_title(r"$\textrm{potential energy}$")
 
-    axs[2, 1].plot(t, energy, label=r"$E_{\mathrm{tot}}$")
-    axs[2, 1].set_title("Total mechanical energy")
-    axs[2, 1].set_xlabel(r"$t\,[\mathrm{s}]$")
-    axs[2, 1].set_ylabel(r"$[\mathrm{J}]$")
+    elif plot == "energy":
+        ax.plot(t, energy, label=r"$E$")
+        ax.set_xlabel(r"$t\, [\unit{s}]$")
+        ax.set_ylabel(r"$E\, [\unit{J}]$")
+        ax.set_title(r"$\textrm{total energy}$")
 
-    axs[2, 2].plot(t, relative_energy_drift, label=r"$\frac{E-E_0}{|E_0|}$")
-    axs[2, 2].set_title("Relative energy drift")
-    axs[2, 2].set_xlabel(r"$t\,[\mathrm{s}]$")
+    elif plot == "energy_drift":
+        ax.plot(
+            t,
+            energy_drift,
+            label=r"$(E-E_0)/|E_0|$",
+        )
+        ax.set_xlabel(r"$t\, [\unit{s}]$")
+        ax.set_title(r"$\textrm{relative energy drift}$")
 
-    components(
-        axs[3, 0], t, data,
-        ("Ex_world", "Ey_world", "Ez_world"),
-        (r"$E_x$", r"$E_y$", r"$E_z$"),
-        "Electric field — inertial frame",
-        r"$[\mathrm{V\,m^{-1}}]$",
-    )
+    elif plot == "E_world":
+        components(
+            ax,
+            ("Ex_world", "Ey_world", "Ez_world"),
+            (r"$E_x$", r"$E_y$", r"$E_z$"),
+            r"$[\unit{V.m^{-1}}]$",
+        )
+        ax.set_title(r"$\bm{E}\ \textrm{world}$")
 
-    components(
-        axs[3, 1], t, data,
-        ("Ex_body", "Ey_body", "Ez_body"),
-        (r"$E_x^b$", r"$E_y^b$", r"$E_z^b$"),
-        "Electric field — body frame",
-        r"$[\mathrm{V\,m^{-1}}]$",
-    )
+    elif plot == "E_body":
+        components(
+            ax,
+            ("Ex_body", "Ey_body", "Ez_body"),
+            (r"$E_x^b$", r"$E_y^b$", r"$E_z^b$"),
+            r"$[\unit{V.m^{-1}}]$",
+        )
+        ax.set_title(r"$\bm{E}\ \textrm{body}$")
 
-    components(
-        axs[3, 2], t, data,
-        ("Bx_world", "By_world", "Bz_world"),
-        (r"$B_x$", r"$B_y$", r"$B_z$"),
-        "Magnetic field — inertial frame",
-        r"$[\mathrm{T}]$",
-    )
+    elif plot == "B_world":
+        components(
+            ax,
+            ("Bx_world", "By_world", "Bz_world"),
+            (r"$B_x$", r"$B_y$", r"$B_z$"),
+            r"$[\unit{T}]$",
+        )
+        ax.set_title(r"$\bm{B}\ \textrm{world}$")
 
-    components(
-        axs[4, 0], t, data,
-        ("Bx_body", "By_body", "Bz_body"),
-        (r"$B_x^b$", r"$B_y^b$", r"$B_z^b$"),
-        "Magnetic field — body frame",
-        r"$[\mathrm{T}]$",
-    )
+    elif plot == "B_body":
+        components(
+            ax,
+            ("Bx_body", "By_body", "Bz_body"),
+            (r"$B_x^b$", r"$B_y^b$", r"$B_z^b$"),
+            r"$[\unit{T}]$",
+        )
+        ax.set_title(r"$\bm{B}\ \textrm{body}$")
 
-    components(
-        axs[4, 1], t, data,
-        (
-            "mu_world_x", "mu_world_y", "mu_world_z",
-            "mu_body_x", "mu_body_y", "mu_body_z",
-        ),
-        (
-            r"$\mu_x$", r"$\mu_y$", r"$\mu_z$",
-            r"$\mu_x^b$", r"$\mu_y^b$", r"$\mu_z^b$",
-        ),
-        "Magnetic moment",
-        r"$[\mathrm{A\,m^2}]$",
-    )
+    elif plot == "mu":
+        components(
+            ax,
+            (
+                "mu_world_x",
+                "mu_world_y",
+                "mu_world_z",
+                "mu_body_x",
+                "mu_body_y",
+                "mu_body_z",
+            ),
+            (
+                r"$\mu_x$",
+                r"$\mu_y$",
+                r"$\mu_z$",
+                r"$\mu_x^b$",
+                r"$\mu_y^b$",
+                r"$\mu_z^b$",
+            ),
+            r"$[\unit{A.m^2}]$",
+        )
+        ax.set_title(r"$\bm{\mu}$")
 
-    axs[4, 2].semilogy(
-        t, constraint_residual, label=r"$\|A\nu-b\|$"
-    )
-    axs[4, 2].semilogy(
-        t, quaternion_error, label=r"$|\|q\|-1|$"
-    )
-    axs[4, 2].set_title("Numerical constraints")
-    axs[4, 2].set_xlabel(r"$t\,[\mathrm{s}]$")
+    elif plot == "numerics":
+        ax.semilogy(
+            t,
+            constraint_residual,
+            label=r"$\|A\nu-b\|$",
+        )
+        ax.semilogy(
+            t,
+            quaternion_error,
+            label=r"$|\|q\|-1|$",
+        )
+        ax.set_xlabel(r"$t\, [\unit{s}]$")
+        ax.set_title(r"$\textrm{numerics}$")
 
-    for ax in axs.flat:
-        ax.grid(True)
-        handles, labels = ax.get_legend_handles_labels()
-        if handles:
-            ax.legend(fontsize="small", ncols=2)
-
-    fig.suptitle(csv_path.name)
-
-    if args.save:
-        fig.savefig(args.save, dpi=200)
-        print(f"Saved {args.save}")
     else:
-        plt.show()
+        raise ValueError(
+            f"Unknown plot: {plot}"
+        )
+
+    ax.grid(True)
+
+    handles, labels = ax.get_legend_handles_labels()
+
+    if handles:
+        ax.legend()
 
 
-if __name__ == "__main__":
-    main()
+for ax in axs[len(plots):]:
+    ax.remove()
+
+
+# =============================================================================
+# Output
+# =============================================================================
+
+if output_file is None:
+    plt.show()
+
+else:
+    plt.savefig(
+        output_file,
+        dpi=300,
+    )

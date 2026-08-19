@@ -1,7 +1,6 @@
 #include "solver.hpp"
 #include "structures.hpp"
 #include <stdexcept>
-
 Solver::Solver(const MechanicalSystem& system, SolverMode mode) : system(system), mode(mode){};
 
 /*
@@ -110,8 +109,8 @@ Wrench Solver::assembleGeneralizedForce(const State& s, double t) const {
     vec3 E = vec3::Zero();
     vec3 B = vec3::Zero();
     for(const auto& field : system.emFields){
-        const vec3 E = field->electricField(s,t);
-        const vec3 B = field->magneticField(s,t);
+        E += field->electricField(s,t);
+        B += field->magneticField(s,t);
     }
     total.force += system.body.charge * (E + s.v.cross(B));
     const MagneticResponse magnetic = calculateMagneticResponse(system, s, t);
@@ -146,9 +145,9 @@ Wrench Solver::assembleLagrangianWrench(const State& s, double t) const {
     mat3 JA = mat3::Zero();
     vec3 dAdt = vec3::Zero();
     for(const auto& field : system.emFields){
-        const vec3 gradPhi = field->scalarPotentialGradient(s, t);
-        const mat3 JA = field->vectorPotentialJacobian(s, t);
-        const vec3 dAdt = field->vectorPotentialTimeDerivative(s, t);
+        gradPhi += field->scalarPotentialGradient(s, t);
+        JA += field->vectorPotentialJacobian(s, t);
+        dAdt += field->vectorPotentialTimeDerivative(s, t);
     }
     total.force += system.body.charge * ((JA.transpose() - JA) * s.v - dAdt - gradPhi);
     const MagneticResponse magnetic = calculateMagneticResponse(system, s, t);

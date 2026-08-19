@@ -1,0 +1,63 @@
+mass 0.02
+radius 0.02
+charge 0.0
+magneticMoment 0.0 0.0 0.0
+magneticPolarizability 0.0 0.0 0.0  0.0 0.0 0.0  0.0 0.0 0.0
+
+# Represents simple conic top
+inertia 3.075e-06 0.0 0.0  0.0 3.075e-06 0.0  0.0 0.0 2.4e-06
+
+# Vector pointing from the COM to the tip of the top
+contactPointBody 0.0 0.0 -0.0375
+
+# N=(0,-sin phi, cos phi)
+normal 0.0 -0.1736481776669303 0.984807753012208
+surfaceVelocity 0.0 0.0 0.0
+velocity 0.0 0.0 0.0
+omega 0.0 0.0 -100.0
+
+# calculate as follows: The tops internal z axis shall point to the world
+# vector p. Define theta = arccos(<e_z, p>) and u = (e_z x p)/||e_z x p||.
+# Then q(t=0) = (cos theta/2, u_x sin theta/2, u_y sin theta/2, u_z sin theta/2).
+# If you have an inclination of the plane of phi and you only want to incline the
+# tops z axis in the yz plane by beta, you can use theta=phi+beta and 
+# q(t=0) = (cos theta/2, sin theta/2) (beta positive in +y direction)
+quaternion 0.9914448613738104 0.1305261922200516 0.0 0.0
+
+# Remember to calculate correctly with tip at 0 and COM at ||contactPointBody||*p
+position 0 -0.009705714191344529 0.03622221848584007
+
+
+solverMode dAlembert
+constraint pointContact
+
+gravityType uniform
+gravity 0.0 0.0 -9.81
+emType none
+
+airType none
+airDensity 1.225
+airDynamicViscosity 1.81e-5
+airDragCoefficient 0.47
+airRotationalDragCoefficient 0.20
+airVelocity 0.0 0.0 0.0
+airAngularVelocity 0.0 0.0 0.0
+
+contactFrictionType dryPoint
+contactFrictionCoefficient 0.30
+
+# N = m g cos(alpha).
+contactNormalLoad 0.1932192811409952
+
+# tanh(|u_t| / v_s).  
+# Set to 0 for unsmoothed Coulomb friction.
+contactFrictionSmoothingSpeed 0.01
+
+rollingResistanceType none
+rollingFrictionCoefficient 0.03
+rollingFrictionSmoothingSpeed 0.02
+
+eddyCurrentType none
+
+dt 1.0e-5
+tEnd 2.0
