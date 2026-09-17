@@ -7,7 +7,7 @@ def remove_old_objects(context):
     bpy.context.scene.frame_set(0)
     for ob in context.scene.objects:
         if ob.type in ["MESH", "EMPTY", "FONT", "CURVE"]:
-            if "Arrow" in ob.name or "safe" in ob.name or "pole" in ob.name or "Placeholder" in ob.name:
+            if "Arrow" in ob.name or "safe" in ob.name:
                 continue
             bpy.ops.object.select_all(action="DESELECT")
             ob.select_set(True)
@@ -32,19 +32,20 @@ def update_time_label(scene):
     text_obj.data.body = f"t = {t:.3f} s"
 
 
+def create_dipole(pos, direction):
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.5, depth=2, enter_editmode=False, align="WORLD", location=pos, scale=(1, 1, 1))
+    dipole = bpy.context.active_object
+    dipole.data.materials.append(bpy.data.materials.get("Dipole"))
+    default_dir = mathutils.Vector((0, 0, 1))
+    target_dir = mathutils.Vector(direction)
+    rotation_quat = default_dir.rotation_difference(target_dir)
+
+    dipole.rotation_mode = "QUATERNION"
+    dipole.rotation_quaternion = rotation_quat
+
+
 if __name__ == "__main__":
     remove_old_objects(bpy.context)
-
-    # Hide the old magnetic-scene geometry, but do not delete it. Some objects
-    # in the .blend may also be used as camera/rig references.
-    for ob in bpy.context.scene.objects:
-        if ob.type == "MESH" and (
-            "safe" in ob.name
-            or "pole" in ob.name
-            or "Placeholder" in ob.name
-        ):
-            ob.hide_viewport = True
-            ob.hide_render = True
 
     # Load input file
     with open("input", "r") as f:
@@ -67,26 +68,31 @@ if __name__ == "__main__":
                 if len(input_para[l[0]]) == 1:
                     input_para[l[0]] = input_para[l[0]][0]
 
+    normal_vector = np.array(input_para["normal"])
+
+    default_dir = mathutils.Vector((0, 0, 1))
+    target_dir = mathutils.Vector(normal_vector)
+    rotation_quat = default_dir.rotation_difference(target_dir)
+
+    rotation_angle = 0.0
     show_time = False
+    camera_follows_ball = True
+    camera_offset = (8, 20, 10)
 
-    # Plane normal from the solver input. Blender's primitive plane has local
-    # +z as its normal, so rotate +z onto the physical plane normal.
-    plane_normal = mathutils.Vector((
-        input_para["normal"][0],
-        input_para["normal"][1],
-        input_para["normal"][2],
-    ))
-    plane_normal.normalize()
-
+    # Create a plane
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 0, 0))
     plane = bpy.context.active_object
-    plane.rotation_mode = "QUATERNION"
-    plane.rotation_quaternion = (
-        mathutils.Vector((0, 0, 1))
-        .rotation_difference(plane_normal)
-    )
+    plane.rotation_euler[0] = np.radians(rotation_angle)
     plane.data.materials.append(bpy.data.materials.get("Plane"))
+    plane.rotation_mode = "QUATERNION"
+    plane.rotation_quaternion = rotation_quat
 
+    # Create Dipoles
+    if input_para.get("emType", "none") == "magneticDipole":
+        for i in range(int(input_para["dipoleCount"])):
+            pos = input_para[f"dipolePosition{i + 1}"]
+            dir = input_para[f"dipoleMoment{i + 1}"]
+            create_dipole((pos[0] * 100, pos[1] * 100, pos[2] * 100), dir)
     # Add ball object
     ball_radius = input_para["radius"] * 100
     print(ball_radius)
@@ -95,57 +101,39 @@ if __name__ == "__main__":
     ball.name = "Ball"
     ball.data.materials.append(bpy.data.materials.get("Ball"))
 
-    start_magnetization = np.array([
-        input_para["magneticMoment"][0],
-        input_para["magneticMoment"][1],
-        input_para["magneticMoment"][2],
-    ])
+    start_magnetization = [input_para["magneticMoment"][0], input_para["magneticMoment"][1], input_para["magneticMoment"][2]]
+    if np.linalg.norm(start_magnetization) == 0:
+        start_magnetization = [0, 0, 1]
+    start_magnetization = np.array(start_magnetization) / np.linalg.norm(start_magnetization)
 
-    # Keep the original carrier object, because the trajectory and quaternion
-    # animation use it. The magnetic arrow is only created for a nonzero moment.
-    mangetization_obj = bpy.data.objects.new("magnetisation", None)
-    mangetization_obj.rotation_mode = "QUATERNION"
-    bpy.context.scene.collection.objects.link(mangetization_obj)
+    # Clone the Arrow object
+    arrow = bpy.data.objects.get("Arrow")
+    if arrow is None:
+        print("Error: Arrow object not found in the scene.")
+    else:
+        mangetization_obj = bpy.data.objects.new("magnetisation", None)
+        arrow_copy = arrow.copy()
+        arrow_copy.data = arrow.data.copy()
 
-    rotation_quat = mathutils.Quaternion((1.0, 0.0, 0.0, 0.0))
+        arrow_copy.name = "arrow"
+        arrow_copy.hide_render = False
 
-    if np.linalg.norm(start_magnetization) > 0.0:
-        start_magnetization = (
-            start_magnetization
-            / np.linalg.norm(start_magnetization)
-        )
+        mangetization_obj.rotation_mode = "QUATERNION"
+        bpy.context.scene.collection.objects.link(mangetization_obj)
+        bpy.context.scene.collection.objects.link(arrow_copy)
+        arrow_copy.parent = mangetization_obj
+        arrow_copy.location = (0, 0, 0)
+        arrow_copy.rotation_euler = (0, 0, 0)
+        arrow_copy.scale = (ball_radius * 1.2, ball_radius * 1.2, ball_radius * 1.2)
+        default_dir = mathutils.Vector((0, 0, 1))
+        target_dir = mathutils.Vector(start_magnetization)
+        rotation_quat = default_dir.rotation_difference(target_dir)
 
-        arrow = bpy.data.objects.get("Arrow")
-
-        if arrow is None:
-            print("Error: Arrow object not found in the scene.")
-        else:
-            arrow_copy = arrow.copy()
-            arrow_copy.data = arrow.data.copy()
-
-            arrow_copy.name = "arrow"
-            arrow_copy.hide_render = False
-
-            bpy.context.scene.collection.objects.link(arrow_copy)
-            arrow_copy.parent = mangetization_obj
-            arrow_copy.location = (0, 0, 0)
-            arrow_copy.rotation_euler = (0, 0, 0)
-            arrow_copy.scale = (
-                ball_radius * 1.2,
-                ball_radius * 1.2,
-                ball_radius * 1.2,
-            )
-
-            default_dir = mathutils.Vector((0, 0, 1))
-            target_dir = mathutils.Vector(start_magnetization)
-            rotation_quat = default_dir.rotation_difference(target_dir)
-
-            arrow_copy.rotation_mode = "QUATERNION"
-            arrow_copy.rotation_quaternion = rotation_quat
-
-    ball.parent = mangetization_obj
-    ball.rotation_mode = "QUATERNION"
-    ball.rotation_quaternion = rotation_quat
+        arrow_copy.rotation_mode = "QUATERNION"
+        arrow_copy.rotation_quaternion = rotation_quat
+        ball.parent = mangetization_obj
+        ball.rotation_mode = "QUATERNION"
+        ball.rotation_quaternion = rotation_quat
 
     if show_time:
         bpy.ops.object.text_add(enter_editmode=False, align="VIEW", location=(0, 0, 0))
@@ -174,20 +162,8 @@ if __name__ == "__main__":
     bpy.context.scene["traj_data"] = traj.tolist()
     bpy.context.scene["slow_motion_factor"] = slow_motion_factor
 
-    bpy.context.view_layer.update()
-    world_to_plane = plane.matrix_world.inverted()
-
-    plane_points = np.array([
-        (world_to_plane @ mathutils.Vector((
-            row[1] * 100,
-            row[2] * 100,
-            row[3] * 100,
-        )))[:2]
-        for row in traj
-    ])
-
-    max_x, max_y = np.max(plane_points[:, 0]), np.max(plane_points[:, 1])
-    min_x, min_y = np.min(plane_points[:, 0]), np.min(plane_points[:, 1])
+    max_x, max_y = np.max(traj[:, 1]) * 100, np.max(traj[:, 2]) * 100
+    min_x, min_y = np.min(traj[:, 1]) * 100, np.min(traj[:, 2]) * 100
 
     mesh = plane.data
     o = ball_radius * 2
@@ -195,38 +171,6 @@ if __name__ == "__main__":
     mesh.vertices[0].co = (min_x - o, min_y - o, 0)
     mesh.vertices[2].co = (min_x - o, max_y + o, 0)
     mesh.vertices[3].co = (max_x + o, max_y + o, 0)
-
-    # Use the existing camera exactly as stored in the .blend.
-    # Do not change its lens, rotation or initial position.
-    scene = bpy.context.scene
-    camera = scene.camera
-
-    if camera is None:
-        cameras = [
-            ob for ob in scene.objects
-            if ob.type == "CAMERA"
-        ]
-
-        if not cameras:
-            raise RuntimeError(
-                "No camera object found in the current Blender scene."
-            )
-
-        if len(cameras) > 1:
-            print(
-                "Scene has no active camera. Available cameras:",
-                [ob.name for ob in cameras],
-            )
-
-        camera = cameras[0]
-        scene.camera = camera
-
-    camera_start_world = camera.matrix_world.translation.copy()
-    com_start_world = mathutils.Vector((
-        traj[0, 1] * 100,
-        traj[0, 2] * 100,
-        traj[0, 3] * 100,
-    ))
 
     empty = bpy.data.objects.new("Empty", None)
     empty_obj = bpy.context.active_object
@@ -246,15 +190,37 @@ if __name__ == "__main__":
     # magnetization_indicator = bpy.context.active_object
     # magnetization_indicator.name = "MagnetizationIndicator"
 
-    frames_to_skip = 2
-    sampled_frames = list(range(0, total_frames, frames_to_skip))
+    camera = bpy.data.objects.get("Camera")
+    if camera is None:
+        bpy.ops.object.camera_add(location=camera_offset)
+        camera = bpy.context.active_object
+        camera.name = "Camera"
+    bpy.context.scene.camera = camera
+    camera.rotation_mode = "QUATERNION"
+    camera.rotation_quaternion = (0.18, 0.10, 0.45, 0.86)
+    # p = np.array(camera.location) - np.array(mangetization_obj.location)
+    # p = p / np.linalg.norm(p)
+    # default_dir = mathutils.Vector((0, 0, -1))
+    # target_dir = mathutils.Vector(-p)
+    # rotation_quat = default_dir.rotation_difference(target_dir)
+    # camera.rotation_quaternion = rotation_quat
 
-    if sampled_frames[-1] != total_frames - 1:
-        sampled_frames.append(total_frames - 1)
+    camera.location = camera_offset
+    # Remove all constraints from the camera
+    camera.constraints.clear()
+    camera_constraint = camera.constraints.new(type="TRACK_TO")
+    camera_constraint.target = mangetization_obj
+    camera_constraint = camera.constraints.new(type="LIMIT_DISTANCE")
+    camera_constraint.target = mangetization_obj
+    camera_constraint.distance = np.linalg.norm(camera_offset) + 5
 
-    spline.bezier_points.add(len(sampled_frames) - 1)
+    number_of_keyframes = total_frames // 2
+    frames_to_skip = total_frames // number_of_keyframes
+    spline.bezier_points.add(number_of_keyframes - 1)
 
-    for j, i in enumerate(sampled_frames):
+    for i in range(total_frames):
+        if i % frames_to_skip != 0 and i != total_frames - 1:
+            continue
 
         t = i / frame_rate / slow_motion_factor
         idx = np.searchsorted(traj[:, 0], t)
@@ -265,40 +231,11 @@ if __name__ == "__main__":
         mangetization_obj.location[1] = traj[idx, 2] * 100
         mangetization_obj.location[2] = traj[idx, 3] * 100
         mangetization_obj.keyframe_insert(data_path="location", frame=i)
-
-        # Translate the camera by the same COM displacement as the sphere.
-        # This preserves the original camera angle, distance, lens and framing.
-        current_com_world = mathutils.Vector((
-            traj[idx, 1] * 100,
-            traj[idx, 2] * 100,
-            traj[idx, 3] * 100,
-        ))
-
-        desired_camera_world = (
-            camera_start_world
-            + current_com_world
-            - com_start_world
-        )
-
-        if camera.parent is None:
-            camera.location = desired_camera_world
-        else:
-            camera.location = (
-                camera.parent.matrix_world.inverted()
-                @ desired_camera_world
-            )
-
-        camera.keyframe_insert(
-            data_path="location",
-            frame=i,
-        )
         mx, my, mz = traj[idx, -3], traj[idx, -2], traj[idx, -1]
         mag = np.sqrt(mx**2 + my**2 + mz**2)
-
-        if mag > 0.0:
-            mx /= mag
-            my /= mag
-            mz /= mag
+        mx /= mag
+        my /= mag
+        mz /= mag
 
         mangetization_obj.rotation_quaternion[0] = traj[idx, 7]
         mangetization_obj.rotation_quaternion[1] = traj[idx, 8]
@@ -320,6 +257,8 @@ if __name__ == "__main__":
         positions.append((world_pos[0], world_pos[1], world_pos[2]))
         ball_pos = ball.matrix_world.translation
         ball_center.append((ball_pos[0], ball_pos[1], ball_pos[2]))
+        j = i // frames_to_skip
+
         spline.bezier_points[j].co = world_pos
         spline.bezier_points[j].handle_left_type = "AUTO"
         spline.bezier_points[j].handle_right_type = "AUTO"

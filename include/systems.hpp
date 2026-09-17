@@ -117,32 +117,6 @@ class NormalContactConstraint final : public Constraint{
         ConstraintData evaluate(const State& state, double t) const override;
 };
 
-class KalkerLinearContact final : public Force{
-    private:
-        vec3 normal;
-        vec3 surfaceVelocity;
-        double shearModulus;
-        double semiAxisA;
-        double semiAxisB;
-        double c11;
-        double c22;
-        double c23;
-        double c33;
-    public:
-        KalkerLinearContact(
-        const vec3& normal,
-        const vec3& surfaceVelocity,
-        double shearModulus,
-        double semiAxisA,
-        double semiAxisB,
-        double c11,
-        double c22,
-        double c23,
-        double c33
-        );
-        Wrench evaluate(const Body& body, const State& state, double t) const override;
-};
-
 class PointContactConstraint final : public Constraint{
     private:
         vec3 contactPointBody;

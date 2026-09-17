@@ -58,10 +58,13 @@ sweep_inputs = {
 }
 
 progress_every = 100
-keep_trajectories = False
+
+# Save the compact sweep result, the complete trajectories, or both.
+save_npz = True
+save_trajectories = False
+
 trajectory_directory = (
-    base_directory
-    / "trajectories"
+    base_directory / "trajectories"
 )
 
 normal = np.array([0.0, 0.0, 1.0])
@@ -323,9 +326,16 @@ def read_final_state(filename):
         float(final_row["x"]),
         float(final_row["y"]),
         float(final_row["z"]),
+        float(final_row["qw"]),
+        float(final_row["qx"]),
+        float(final_row["qy"]),
+        float(final_row["qz"]),
         float(final_row["vx"]),
         float(final_row["vy"]),
         float(final_row["vz"]),
+        float(final_row["Ox"]),
+        float(final_row["Oy"]),
+        float(final_row["Oz"]),
         float(final_row["constraint_residual"]),
     )
 
@@ -393,7 +403,7 @@ def run_in_directory(
         )
         print(process.stderr)
 
-        if keep_trajectories:
+        if save_trajectories:
             with open(
                 workdir / "error.log",
                 "w",
@@ -404,7 +414,7 @@ def run_in_directory(
             combination_index,
             index,
             -1,
-            np.full(7, np.nan),
+            np.full(14, np.nan),
         )
 
     final_state = np.array(
@@ -433,10 +443,10 @@ def run_simulation(point):
             combination_index,
             index,
             0,
-            np.full(7, np.nan),
+            np.full(14, np.nan),
         )
 
-    if keep_trajectories:
+    if save_trajectories:
         workdir = (
             trajectory_directory
             / f"combination_{combination_index:04d}"
@@ -470,6 +480,11 @@ def run_simulation(point):
 # =============================================================================
 
 def main():
+    if not save_npz and not save_trajectories:
+        raise ValueError(
+            "Set save_npz, save_trajectories, or both to True."
+        )
+
     x = np.linspace(
         -plate_size_x / 2.0 + radius,
         plate_size_x / 2.0 - radius,
@@ -513,7 +528,7 @@ def main():
             f"{name:<28} = {values}"
         )
 
-    if keep_trajectories:
+    if save_trajectories:
         for combination_index, parameter_values in enumerate(
             sweep_combinations
         ):
@@ -552,7 +567,7 @@ def main():
         (
             len(sweep_combinations),
             xx.size,
-            7,
+            14,
         ),
         np.nan,
     )
@@ -622,7 +637,7 @@ def main():
             len(sweep_combinations),
             n_y,
             n_x,
-            7,
+            14,
         )
     )
 
@@ -637,43 +652,53 @@ def main():
         )
     }
 
-    np.savez(
-        output_file,
-        x=x,
-        y=y,
-        sweep_names=np.array(
-            sweep_names,
-            dtype=str,
-        ),
-        sweep_combinations=sweep_combinations,
-        status=status,
-        x_final=final_state[:, :, :, 0],
-        y_final=final_state[:, :, :, 1],
-        z_final=final_state[:, :, :, 2],
-        vx_final=final_state[:, :, :, 3],
-        vy_final=final_state[:, :, :, 4],
-        vz_final=final_state[:, :, :, 5],
-        constraint_residual=final_state[:, :, :, 6],
-        plate_size_x=plate_size_x,
-        plate_size_y=plate_size_y,
-        sphere_radius=radius,
-        magnet_exclusion_radius=magnet_exclusion_radius,
-        dipole_positions=dipole_positions,
-        dipole_moments=dipole_moments,
-        dipole_field_scale=dipole_field_scale,
-        t_end=t_end,
-        rolling_resistance_type=rolling_resistance_type,
-        rolling_friction_coefficient=rolling_friction_coefficient,
-        rolling_friction_smoothing_speed=rolling_friction_smoothing_speed,
-        **sweep_output,
-    )
+    if save_npz:
+        np.savez(
+            output_file,
+            x=x,
+            y=y,
+            sweep_names=np.array(
+                sweep_names,
+                dtype=str,
+            ),
+            sweep_combinations=sweep_combinations,
+            status=status,
+            x_final=final_state[:, :, :, 0],
+            y_final=final_state[:, :, :, 1],
+            z_final=final_state[:, :, :, 2],
+            qw_final=final_state[:, :, :, 3],
+            qx_final=final_state[:, :, :, 4],
+            qy_final=final_state[:, :, :, 5],
+            qz_final=final_state[:, :, :, 6],
+            vx_final=final_state[:, :, :, 7],
+            vy_final=final_state[:, :, :, 8],
+            vz_final=final_state[:, :, :, 9],
+            Ox_final=final_state[:, :, :, 10],
+            Oy_final=final_state[:, :, :, 11],
+            Oz_final=final_state[:, :, :, 12],
+            constraint_residual=final_state[:, :, :, 13],
+            plate_size_x=plate_size_x,
+            plate_size_y=plate_size_y,
+            sphere_radius=radius,
+            magnet_exclusion_radius=magnet_exclusion_radius,
+            dipole_positions=dipole_positions,
+            dipole_moments=dipole_moments,
+            dipole_field_scale=dipole_field_scale,
+            t_end=t_end,
+            rolling_resistance_type=rolling_resistance_type,
+            rolling_friction_coefficient=rolling_friction_coefficient,
+            rolling_friction_smoothing_speed=rolling_friction_smoothing_speed,
+            **sweep_output,
+        )
 
     print(f"\nSuccessful  = {successful}")
     print(f"Skipped     = {skipped}")
     print(f"Failed      = {failed}")
-    print(f"Output      = {output_file}")
 
-    if keep_trajectories:
+    if save_npz:
+        print(f"Output      = {output_file}")
+
+    if save_trajectories:
         print(
             f"Trajectories = "
             f"{trajectory_directory}"

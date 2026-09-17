@@ -9,7 +9,6 @@ import cartopy.feature as cfeature
 import cartopy.mpl.ticker as cticker
 from pathlib import Path
 from matplotlib.ticker import FuncFormatter
-
 plt.style.use("seaborn-v0_8-paper")
 plt.rcParams.update({
     "text.usetex": True,
@@ -22,9 +21,8 @@ plt.rcParams.update({
     "legend.fontsize": 32,
 })
 
-R = 0.005  # sphere radius
 ##############################################################################
-# PARAMETERS
+R = 0.005  # sphere radius
 INPUT_FILE = Path("results/earth_results.npz")
 OUTPUT_FILE = Path("results/earth_map.png")
 MARKERS = [
@@ -38,13 +36,25 @@ DPI = 300
 COLORMAP = "seismic"
 VALUE_NAME = "x"      # or "t"
 ##############################################################################
-
-
 def load_data(filename):
     data = np.load(filename)
+
     lat = data["lat"]
     lon = data["lon"]
-    values = data[VALUE_NAME]
+
+    value_key = {
+        "x": "x_final",
+        "t": "t_final",
+    }.get(
+        VALUE_NAME,
+        VALUE_NAME,
+    )
+
+    values = data[value_key]
+
+    if values.ndim == 3:
+        values = values[0]
+
     return lat, lon, values
 
 
@@ -94,15 +104,44 @@ def draw_markers(ax, markers):
 
 
 def draw_data(ax, lat, lon, values):
-    mesh = ax.pcolormesh(
-        lon,
-        lat,
+    lat = np.asarray(lat)
+    lon = np.asarray(lon)
+    values = np.asarray(values)
+
+    if lat.shape != lon.shape or lat.shape != values.shape:
+        raise ValueError(
+            "lat, lon and values must have identical shapes."
+        )
+
+    # earth_grid.py contains both -180 deg and +180 deg.  These are the
+    # same meridian, so remove the duplicate final column before plotting.
+    if (
+        lon.shape[1] > 1
+        and np.allclose(
+            lon[:, -1] - lon[:, 0],
+            360.0,
+            atol=1.0e-10,
+        )
+    ):
+        lon = lon[:, :-1]
+        lat = lat[:, :-1]
+        values = values[:, :-1]
+
+    values = np.ma.masked_invalid(values)
+
+    # The Earth grid is regular in latitude/longitude.  imshow avoids
+    # Cartopy's wrapped-QuadMesh polygon construction at the dateline and
+    # poles, which can produce GeometryCollection objects in Shapely.
+    image = ax.imshow(
         values,
+        origin="lower",
+        extent=(-180.0, 180.0, -90.0, 90.0),
         transform=ccrs.PlateCarree(),
-        shading="auto",
+        interpolation="nearest",
         cmap=COLORMAP,
     )
-    return mesh
+
+    return image
 
 
 def colored_line(ax, x, y, c, cmap, norm, lw=2.0, alpha=1.0, zorder=2):
@@ -123,13 +162,11 @@ def colored_line(ax, x, y, c, cmap, norm, lw=2.0, alpha=1.0, zorder=2):
     return lc
 
 
-def black_line(ax, x, y, lw=2.0, alpha=1.0, zorder=2):
+def black_line(ax, x, y, lw=1.0, alpha=0.3, zorder=2):
     x = np.asarray(x)
     y = np.asarray(y)
-
     pts = np.column_stack([x, y]).reshape(-1, 1, 2)
     segs = np.concatenate([pts[:-1], pts[1:]], axis=1)
-
     lc = LineCollection(
         segs,
         colors="black",
@@ -197,6 +234,7 @@ fig = plt.figure(figsize=(19, 8), layout='tight') #9,7.5
 
 ax_map = fig.add_axes([0.03, 0.12, 0.47, 0.76],
                       projection=ccrs.Robinson())
+ax_map.set_global()
 
 ax = fig.add_axes([0.66, 0.12, 0.35, 0.76]) #0,32
 
@@ -304,11 +342,11 @@ sm_O = ScalarMappable(norm=norm_O, cmap=cmap_O)
 sm_O.set_array([])
 cbar1 = fig.colorbar(sm_O, ax=ax, fraction=0.046, pad=0.04)
 cbar1.set_label(r"$\| \bm{\Omega} \| \, [\unit{\second^{-1}}]$")
-cbar1.set_ticks([0, 50, 100, 150, 200])
+cbar1.set_ticks([99.2, 99.4, 99.6, 99.8, 100])
 cbar2 = fig.colorbar(mesh, ax=ax_map, fraction=0.046, pad=0.04)
 cbar2.ax.yaxis.set_major_formatter(FuncFormatter(lambda x, pos: f"${100*x:.1f}$"))
 cbar2.set_label(r"$x|_{t=0.5 \, \unit{s}} \, [\unit{cm}]$")
-cbar2.set_ticks([-0.08, -0.04, 0.0, 0.08, 0.04])
+cbar2.set_ticks([-0.002, 0.0, 0.002])
 ax_map.text(
     0.02,
     1.00,

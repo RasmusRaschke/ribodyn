@@ -44,7 +44,7 @@ dipoleFieldScale 1.0e-7
 # Hard exclusion radius around each mathematical point dipole.
 dipoleMinimumDistance 0.001
 
-airType sphere
+airType none
 airDensity 1.225
 airDynamicViscosity 0.05
 airDragCoefficient 0.0

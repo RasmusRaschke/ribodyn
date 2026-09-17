@@ -9,7 +9,6 @@
 # - 3x3 matrices are entered row by row.
 # - INERTIAL means that a quantity is given in the outer inertial frame.
 # - BODY means that a quantity is given in the bodies inner comoving frame.
-# - If DEFAULT appears in a section, one can leave it unspecified.
 
 # -----------------------------------------------------------------------------
 # Rigid-body properties
@@ -63,9 +62,10 @@ solverMode lagrangian
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     rolling
-#     pointContact
+#     normalContact
+#     johnsonSpherePlane
 
 constraint rolling
 
@@ -74,26 +74,34 @@ constraint rolling
 normal 0 -0.1736481776669303 0.984807753012208
 
 ### Alternatives: ###
-# -----------------------------
-# constraint pointContact
+#-----------------------------
+# constraint normalContact
 # surfaceVelocity vs_x vs_y vs_z
-# contactPointBody x y z -> Contact point of the tip relative to COM in BODY coordinates
 # ----------------------------
+
+### Alternatives: ###
+#-----------------------------
+# constraint johnsonSpherePlane
+# rollingDirection t_x t_y t_z
+# surfaceVelocity vs_x vs_y vs_z
+# ----------------------------
+
 
 # -----------------------------------------------------------------------------
 # Gravity model
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     uniform
 #     central
-
 gravityType uniform
+
+# Required for gravityType uniform.
 gravity 0.0 0.0 -9.81
 
 ### Alternatives: ###
-# -----------------------------
+#-----------------------------
 # gravityType central
 # mu 1.0
 # ----------------------------
@@ -105,7 +113,7 @@ gravity 0.0 0.0 -9.81
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     uniform
 #     rotatingUniform
 #     electricMonopole
@@ -162,7 +170,7 @@ electricField 0.0 0.0 0.0
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     sphere
 
 airType sphere
@@ -186,12 +194,14 @@ airAngularVelocity 0.0 0.0 0.0
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     viscousPoint
 #     dryPoint
 
 contactFrictionType viscousPoint
 contactTangentialDamping 0.03
+#Contact point of the tip relative to COM in BODY coordinates
+contactPointBody 0.0 0.0 -0.0375 
 
 ### Alternatives: ###
 # ----------------------------
@@ -201,12 +211,23 @@ contactTangentialDamping 0.03
 # contactFrictionSmoothingSpeed 0.01
 # ----------------------------
 
+airType sphere
+airDensity 1.225
+# Set to zero to disable the linear Stokes terms.
+airDynamicViscosity 1.81e-5
+airDragCoefficient 0.47
+# Set to zero to disable quadratic rotational air resistance.
+airRotationalDragCoefficient 0.20
+# Inertial-frame ambient-air velocities.
+airVelocity 0.0 0.0 0.0
+airAngularVelocity 0.0 0.0 0.0
+
 # -----------------------------------------------------------------------------
 # Regularized Coulomb rolling resistance
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     coulomb
 
 rollingResistanceType coulomb
@@ -226,12 +247,57 @@ normalLoad 9.66096405704976
 #     N = max(0, -mass * <gravity, normal>)
 
 
+### Alternatives: ###
+# ----------------------------
+# rollingResistanceType none
+# ----------------------------
+
+# -----------------------------------------------------------------------------
+# Kalker Linear Contact Friction
+# CAUTION: Kalker assumes that the initial velocity is non-zero, so you 
+# have to enter some non-zero (and also not too small) starting velocity
+# and also the translated rotational velocity under the Kalker model
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     kalkerLinear
+#     IF USING KALKER: Set constraint mode to normalContact!
+
+contactFrictionType kalkerLinear
+contactShearModulus 8.08e10
+contactSemiAxisA 2.327e-5
+contactSemiAxisB 2.327e-5
+contactC11 4.12
+contactC22 3.67
+contactC23 1.47
+contactC33 1.19
+
+# -----------------------------------------------------------------------------
+# Johnson Contact Creep
+# CAUTION: Johnson assumes that the initial velocity is non-zero, so you 
+# have to enter some non-zero (and also not too small) starting velocity
+# and also the translated rotational velocity under the Johnson model
+# -----------------------------------------------------------------------------
+
+# Allowed values:
+#     none
+#     linear
+#     bounded
+#     IF USING JOHNSON: Set constraint type to johnsonSpherePlane
+
+johnsonContactType = linear
+shearModulus 8.08e10
+poissonRation 0.30
+normalLoad = 0.1932192518980142
+johnsonFrictionCoefficient 0.30
+
 # -----------------------------------------------------------------------------
 # Viscous Eddy Current Damping
 # -----------------------------------------------------------------------------
 
 # Allowed values:
-#     none (DEFAULT)
+#     none
 #     sphere
 #     viscous
 
@@ -246,10 +312,11 @@ eddyCurrentTimeStep 1e-6
 # rotationalDamping 0.1
 # ----------------------------
 
+
 # -----------------------------------------------------------------------------
 # Integration interval
 # -----------------------------------------------------------------------------
-# Compared to magsphere, the improved RKMK4 should allow for larger increments
+#Compared to magsphere, the improved RKMK4 should allow for larger increments
 
 dt 1e-5
 tEnd 10.0

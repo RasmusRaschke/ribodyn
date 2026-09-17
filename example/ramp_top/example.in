@@ -5,16 +5,18 @@ magneticMoment 0.0 0.0 0.0
 magneticPolarizability 0.0 0.0 0.0  0.0 0.0 0.0  0.0 0.0 0.0
 
 # Represents simple conic top
-inertia 3.075e-06 0.0 0.0  0.0 3.075e-06 0.0  0.0 0.0 2.4e-06
+# inertia 3.075e-06 0.0 0.0  0.0 3.075e-06 0.0  0.0 0.0 2.4e-06
+inertia 0.0000032 0.0 0.0  0.0 0.0000032 0.0  0.0 0.0 0.0000032
 
 # Vector pointing from the COM to the tip of the top
-contactPointBody 0.0 0.0 -0.0375
+# contactPointBody 0.0 0.0 -0.0375
+contactPointBody 0.0 0.0 -0.02
 
 # N=(0,-sin phi, cos phi)
 normal 0.0 -0.1736481776669303 0.984807753012208
 surfaceVelocity 0.0 0.0 0.0
 velocity 0.0 0.0 0.0
-omega 0.0 0.0 -100.0
+omega 0.0 0.0 100.0
 
 # calculate as follows: The tops internal z axis shall point to the world
 # vector p. Define theta = arccos(<e_z, p>) and u = (e_z x p)/||e_z x p||.

@@ -1,0 +1,44 @@
+mass 0.02
+radius 0.01
+charge 0.0
+magneticMoment 0.0 0.0 1.0  # placeholder; earth_grid.py overrides this
+magneticPolarizability 0.00 0.00 0.00  0.00 0.00 0.00  0.00 0.00 0.00
+inertia 8.0e-7 0.000 0.000  0.000 8.0e-7 0.000  0.000 0.000 8.0e-7
+contactPointBody 0.0 0.0 -0.01
+position 0 -0.00087155742747658171 0.0099619469809174559
+velocity 0.0 0.0 0.0
+omega 0.0 0.0 100.0
+quaternion 0.9990482215818578 0.043619387365336 0.0 0.0
+
+solverMode lagrangian
+constraint pointContact
+normal 0.0 0.0 1.0
+gravityType none
+emType uniformMagnetic
+magneticField 0.0 0.0 0.0
+
+airType none
+airDensity 1.225
+airDynamicViscosity 1.81e-5
+airDragCoefficient 0.47
+airRotationalDragCoefficient 0.20
+airVelocity 0.0 0.0 0.0
+airAngularVelocity 0.0 0.0 0.0
+
+contactFrictionType dryPoint
+contactFrictionCoefficient 0.3
+contactNormalLoad 0.1962 
+contactFrictionSmoothingSpeed 0.01
+
+rollingResistanceType none
+rollingFrictionCoefficient 0.03
+rollingFrictionSmoothingSpeed 0.02
+surfaceVelocity 0.0 0.0 0.0
+normalLoad 9.66096405704976
+
+eddyCurrentType none
+eddyCurrentConductivity 6e7
+eddyCurrentTimeStep 1e-6
+
+dt 1e-4
+tEnd 1.0

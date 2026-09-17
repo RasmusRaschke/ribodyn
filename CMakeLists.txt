@@ -30,7 +30,6 @@ add_executable(
     systems/fixedMonopoleEMField.cpp
     systems/uniformMagneticField.cpp
     systems/normalContactConstraint.cpp
-    systems/kalkerLinearContact.cpp
     systems/pointContactConstraint.cpp
     systems/pointContactFriction.cpp
 

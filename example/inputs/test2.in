@@ -1,0 +1,55 @@
+# =============================================================================
+# Axisymmetric sphere: normal spin on a 15-degree incline
+# Strongly anisotropic inertia, exact no-slip rolling
+# =============================================================================
+
+mass 0.02
+radius 0.01
+charge 0.0
+
+magneticMoment 0.0 0.0 0.0
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+
+# I_perp = 1.6e-6 kg m^2
+# I_parallel = 4.0e-7 kg m^2
+# symmetry axis = body z-axis
+inertia 1.9e-6 0 0  0 1.9e-6 0  0 0 1.0e-7
+
+
+# COM initially one radius above the plane
+position 0.0 0.00258819045 0.00965925826
+
+# Pure normal spin initially: v = 0 and omega_world || normal
+velocity 0.0 0.0 0.0
+omega 0.0 0.0 050.0
+
+# Rotate body z-axis onto the plane normal:
+# rotation by -15 degrees about world x
+quaternion 0.9914448614 -0.1305261922 0.0 0.0
+
+
+solverMode dAlembert
+
+constraint rolling
+contactFrictionType none
+eddyCurrentType none
+# n = (0, sin(15 deg), cos(15 deg))
+normal 0.0 0.2588190451 0.9659258263
+
+
+gravityType uniform
+gravity 0.0 0.0 -9.81
+
+
+emType none
+
+dipoleFieldScale 1.0e-7
+dipoleMinimumDistance 0.001
+
+airType none
+
+rollingResistanceType none
+
+
+dt 1e-5
+tEnd 2.0

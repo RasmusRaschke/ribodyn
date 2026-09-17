@@ -1,0 +1,41 @@
+mass 0.02
+radius 0.01
+charge 0.0
+magneticMoment 0.0 0.0 0.0
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+inertia 8e-7 0 0  0 8e-7 0  0 0 8e-7
+
+normal 0.0 -0.1736481776669303 0.984807753012208
+surfaceVelocity 0.0 0.0 0.0
+position 0.0 -0.001736481776669303 0.00984807753012208
+
+# U = 0.1 m/s downhill.
+velocity 0.0 -0.0984807753012208 -0.01736481776669303
+
+# omega = 10 e_x + 100 n: rolling plus strong normal spin.
+omega 10.0 -17.36481776669303 98.4807753012208
+quaternion 1.0 0.0 0.0 0.0
+
+solverMode dAlembert
+constraint johnsonSpherePlane
+johnsonContactType dynamic
+
+shearModulus 0.4e10
+poissonRatio 0.30
+normalLoad 0.19321928114099524
+johnsonFrictionCoefficient 0.3
+
+# Optional measured/effective contact radius. If omitted, Hertz is used.
+johnsonContactRadius 2.327e-5
+
+gravityType uniform
+gravity 0.0 0.0 -9.81
+emType none
+contactFrictionType none
+airType none
+rollingResistanceType none
+eddyCurrentType none
+
+# The quasistatic creep law is stiff with a steel Hertz contact.
+dt 1e-5
+tEnd 2.0

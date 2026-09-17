@@ -1,0 +1,14 @@
+mass 0.02
+radius 0.01
+charge 0.2
+inertia 8e-7 0 0  0 8e-7 0  0 0 8e-7
+magneticMoment 0.4 0.1 0.2
+magneticPolarizability 0.02 0.00 0.00  0.00 0.01 0.00  0.00 0.00 0.03
+solverMode dAlembert
+position 0 0 0.01
+velocity 0 0 0
+omega 0 0 100
+quaternion 1 0 0 0
+
+dt 1e-4
+tEnd 5
