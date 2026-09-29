@@ -98,54 +98,106 @@ void addConstraint(MechanicalSystem& system, const Input& input){
         return;
     }
 
+    if(type == "instantContact"){
+        vec3 normal = input.getVec3("normal");
+        const double norm = normal.norm();
+        if(norm < 1e-14){
+            throw std::runtime_error(
+                "Instantaneous contact normal must be non-zero."
+            );
+        normal /= norm;
+        const vec3 surfaceVelocity = input.has("surfaceVelocity") ? input.getVec3("surfaceVelocity") : vec3::Zero();
+        system.constraints.push_back(std::make_unique<InstantContactConstraint>(
+            system.body.radius,
+            normal,
+            surfaceVelocity
+        ));
+        return;
+        }
+    }
+
     throw std::runtime_error(
         "Unknown constraint type: " + type
     );
 }
 
-void addPointContactFriction(MechanicalSystem& system, const Input& input){
+void addContactFriction(MechanicalSystem& system, const Input& input){
     const std::string type = optionalMode(input, "contactFrictionType");
     if(type == "none")
         return;
-    if(optionalMode(input, "constraint") != "pointContact"){
-        throw std::runtime_error(
-            "Point-contact friction requires 'constraint pointContact'."
-        );
-    }
+    const std::string constraintType = optionalMode(input,"constraint");
     const vec3 surfaceVelocity = input.has("surfaceVelocity") ? input.getVec3("surfaceVelocity") : vec3::Zero();
-    if(type == "viscous"){
-        system.nonConservativeForces.push_back(
-            std::make_unique<PointContactViscousFriction>(
-                input.getVec3("contactPointBody"),
-                input.getVec3("normal"),
-                surfaceVelocity,
-                input.getDouble("contactTangentialDamping")
-            )
-        );
-        return;
+    if(constraintType == "pointContact"){
+        if(type == "viscous"){
+            system.nonConservativeForces.push_back(
+                std::make_unique<PointContactViscousFriction>(
+                    input.getVec3("contactPointBody"),
+                    input.getVec3("normal"),
+                    surfaceVelocity,
+                    input.getDouble("contactTangentialDamping")
+                )
+            );
+            return;
+        }
+
+        if(type == "dry"){
+            const double smoothingSpeed =
+                input.has("contactFrictionSmoothingSpeed") ? input.getDouble("contactFrictionSmoothingSpeed") : 0.0;
+            system.nonConservativeForces.push_back(
+                std::make_unique<PointContactDryFriction>(
+                    input.getVec3("contactPointBody"),
+                    input.getVec3("normal"),
+                    surfaceVelocity,
+                    input.getDouble("contactFrictionCoefficient"),
+                    input.getDouble("contactNormalLoad"),
+                    smoothingSpeed
+                )
+            );
+            return;
+        }
     }
 
-    if(type == "dry"){
-        const double smoothingSpeed = input.has("contactFrictionSmoothingSpeed") ? input.getDouble( "contactFrictionSmoothingSpeed") : 0.0;
-        system.nonConservativeForces.push_back(
-            std::make_unique<PointContactDryFriction>(
-                input.getVec3("contactPointBody"),
-                input.getVec3("normal"),
-                surfaceVelocity,
-                input.getDouble(
-                    "contactFrictionCoefficient"
-                ),
-                input.getDouble(
-                    "contactNormalLoad"
-                ),
-                smoothingSpeed
-            )
-        );
-        return;
+    if(constraintType == "instantContact"){
+        vec3 normal = input.getVec3("normal");
+        const double normalNorm = normal.norm();
+        if(normalNorm < 1e-14){
+            throw std::runtime_error(
+                "Sphere-contact friction normal must be nonzero."
+            );
+        }
+        normal /= normalNorm;
+        if(type == "viscous"){
+            system.nonConservativeForces.push_back(
+                std::make_unique<InstantViscousFriction>(
+                    system.body.radius,
+                    normal,
+                    surfaceVelocity,
+                    input.getDouble("contactTangentialDamping")
+                )
+            );
+            return;
+        }
+
+        if(type == "dry"){
+            const double smoothingSpeed = input.has("contactFrictionSmoothingSpeed") ? input.getDouble("contactFrictionSmoothingSpeed") : 0.0;
+            system.nonConservativeForces.push_back(
+                std::make_unique<InstantDryFriction>(
+                    system.body.radius,
+                    normal,
+                    surfaceVelocity,
+                    input.getDouble("contactFrictionCoefficient"),
+                    input.getDouble("contactNormalLoad"),
+                    smoothingSpeed
+                )
+            );
+            return;
+        }
     }
 
     throw std::runtime_error(
-        "Unknown point-contact friction type: " + type
+        "Contact friction type '" + type
+        + "' is incompatible with constraint '"
+        + constraintType + "'."
     );
 }
 
@@ -309,6 +361,21 @@ void addElectromagnetism(MechanicalSystem& system, const Input& input){
         return;
     }
 
+    if(type == "modulatedUniform"){
+        const double phase = input.has("fieldPhase") ? input.getDouble("fieldPhase") : 0.0;
+        const vec3 electricField = input.has("electricField") ? input.getVec3("electricField") : vec3::Zero();
+        system.emFields.push_back(
+            std::make_unique<ModulatedUniformEMField>(
+                input.getVec3("magneticField"),
+                input.getDouble("fieldModulationAmplitude"),
+                input.getDouble("fieldAngularFrequency"),
+                phase,
+                electricField
+            )
+        );
+        return;
+    }
+
     throw std::runtime_error("Unknown EM field type: " + type);
 }
 
@@ -357,7 +424,7 @@ int main(int argc, char* argv[]){
         system.body.magneticPolarizability = input.getMat3("magneticPolarizability");
         validateBody(system.body);
         addConstraint(system, input);
-        addPointContactFriction(system, input);
+        addContactFriction(system, input);
         addGravity(system, input);
         addElectromagnetism(system, input);
         addDissipativeForces(system, input);

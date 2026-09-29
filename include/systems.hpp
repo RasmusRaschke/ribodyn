@@ -168,6 +168,53 @@ class PointContactDryFriction final : public Force{
         Wrench evaluate(const Body& body, const State& state, double t) const override;
 };
 
+class InstantContactConstraint final : public Constraint {
+    public:
+        InstantContactConstraint(double radius, const vec3& normal, const vec3& surfaceVelocity = vec3::Zero());
+        ConstraintData evaluate(const State& state, double t) const override;
+
+    private:
+        double radius;
+        vec3 normal;
+        vec3 surfaceVelocity;
+};
+
+
+class InstantViscousFriction final : public Force {
+    public:
+        InstantViscousFriction(double radius, const vec3& normal,const vec3& surfaceVelocity, double tangentialDamping);
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+
+    private:
+        double radius;
+        vec3 normal;
+        vec3 surfaceVelocity;
+        double tangentialDamping;
+};
+
+
+class InstantDryFriction final : public Force {
+    public:
+        InstantDryFriction(
+            double radius,
+            const vec3& normal,
+            const vec3& surfaceVelocity,
+            double frictionCoefficient,
+            double normalLoad,
+            double smoothingSpeed
+        );
+        Wrench evaluate(const Body& body, const State& state, double t) const override;
+
+    private:
+        double radius;
+        vec3 normal;
+        vec3 surfaceVelocity;
+        double frictionCoefficient;
+        double normalLoad;
+        double smoothingSpeed;
+};
+
+
 struct FixedMagneticDipoleSource{
     vec3 position = vec3::Zero();
     vec3 moment = vec3::Zero();
@@ -232,6 +279,32 @@ class UniformMagneticField final : public ElectromagneticField{
         vec3 magneticField(const State& state, double t) const override;
         mat3 magneticFieldJacobian(const State& state, double t) const override;
 };
+
+class ModulatedUniformEMField : public ElectromagneticField {
+    private:
+        vec3 B0;
+        double epsilon;
+        double omega;
+        double phase;
+        vec3 E0;
+
+        double modulation(double t) const;
+        double modulationDerivative(double t) const;
+        vec3 field(double t) const;
+        vec3 fieldDerivative(double t) const;
+
+    public:
+        ModulatedUniformEMField(const vec3& magneticField, double modulationAmplitude, double angularFrequency, double phase, const vec3& electricField);
+        double scalarPotential(const State& state, double t) const override;
+        vec3 vectorPotential(const State& state, double t) const override;
+        vec3 scalarPotentialGradient(const State& state, double t) const override;
+        mat3 vectorPotentialJacobian(const State& state, double t) const override;
+        vec3 vectorPotentialTimeDerivative(const State& state, double t) const override;
+        vec3 electricField(const State& state, double t) const override;
+        vec3 magneticField(const State& state, double t) const override;
+        mat3 magneticFieldJacobian(const State& state, double t) const override;
+};
+
 
 class SphereEddyCurrentDamping final : public Force{
     private:

@@ -1,0 +1,33 @@
+mass 0.02
+radius 0.01
+charge 0.0
+magneticMoment 0.0 0.0 1
+inertia 8.0000000000000007e-07 0 0  0 8.0000000000000007e-07 0  0 0 8.0000000000000007e-07
+magneticPolarizability 0 0 0  0 0 0  0 0 0
+
+position 0 0 0.01
+velocity -0.0033049566951765621 0.00058416348775419821 0
+omega -0.058416348775418903 -0.33049566951765602 -4
+quaternion 0.033561861893252359 -0.23447658826339654 0.9715422435399379 0
+
+solverMode dAlembert
+constraint rolling
+normal 0 0 1
+contactFrictionType none
+
+gravityType uniform
+gravity 0 0 -9.8066499999999994
+
+emType modulatedUniform
+magneticField 0 0 7.0000000000000007e-05
+fieldModulationAmplidude 0.12
+fieldAngularFrequency 5.5867639813947747
+fieldPhase -3.3057310702707063
+electricField 0 0 0
+
+airType none
+rollingResistanceType none
+eddyCurrentType none
+
+dt 1e-4
+tEnd 50.0

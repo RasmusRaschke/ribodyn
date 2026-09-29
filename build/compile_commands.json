@@ -118,5 +118,23 @@
   "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o -c /home/lyserg/Documents/ribodyn/systems/pointContactFriction.cpp",
   "file": "/home/lyserg/Documents/ribodyn/systems/pointContactFriction.cpp",
   "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/modulatedUniformEMField.cpp.o -c /home/lyserg/Documents/ribodyn/systems/modulatedUniformEMField.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/modulatedUniformEMField.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/modulatedUniformEMField.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/instantContactConstraint.cpp.o -c /home/lyserg/Documents/ribodyn/systems/instantContactConstraint.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/instantContactConstraint.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/instantContactConstraint.cpp.o"
+},
+{
+  "directory": "/home/lyserg/Documents/ribodyn/build",
+  "command": "/usr/bin/g++ -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/solver.dir/systems/instantContactFriction.cpp.o -c /home/lyserg/Documents/ribodyn/systems/instantContactFriction.cpp",
+  "file": "/home/lyserg/Documents/ribodyn/systems/instantContactFriction.cpp",
+  "output": "/home/lyserg/Documents/ribodyn/build/CMakeFiles/solver.dir/systems/instantContactFriction.cpp.o"
 }
 ]

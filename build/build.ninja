@@ -229,6 +229,33 @@ build CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o: CXX_COMPILER__so
   OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
   TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
 
+build CMakeFiles/solver.dir/systems/modulatedUniformEMField.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/modulatedUniformEMField.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/modulatedUniformEMField.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/instantContactConstraint.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/instantContactConstraint.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/instantContactConstraint.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/systems/instantContactFriction.cpp.o: CXX_COMPILER__solver_unscanned_Release /home/lyserg/Documents/ribodyn/systems/instantContactFriction.cpp || cmake_object_order_depends_target_solver
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/solver.dir/systems/instantContactFriction.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20
+  INCLUDES = -I/home/lyserg/Documents/ribodyn/include -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/systems
+  TARGET_SUPPORT_DIR = CMakeFiles/solver.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target solver
@@ -237,7 +264,7 @@ build CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o: CXX_COMPILER__so
 #############################################
 # Link the executable solver
 
-build solver: CXX_EXECUTABLE_LINKER__solver_Release CMakeFiles/solver.dir/src/main.cpp.o CMakeFiles/solver.dir/src/io.cpp.o CMakeFiles/solver.dir/src/utility.cpp.o CMakeFiles/solver.dir/src/solver.cpp.o CMakeFiles/solver.dir/src/integrator.cpp.o CMakeFiles/solver.dir/src/emField.cpp.o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o CMakeFiles/solver.dir/systems/centralGravity.cpp.o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o
+build solver: CXX_EXECUTABLE_LINKER__solver_Release CMakeFiles/solver.dir/src/main.cpp.o CMakeFiles/solver.dir/src/io.cpp.o CMakeFiles/solver.dir/src/utility.cpp.o CMakeFiles/solver.dir/src/solver.cpp.o CMakeFiles/solver.dir/src/integrator.cpp.o CMakeFiles/solver.dir/src/emField.cpp.o CMakeFiles/solver.dir/systems/rollingConstraint.cpp.o CMakeFiles/solver.dir/systems/uniformGravity.cpp.o CMakeFiles/solver.dir/systems/centralGravity.cpp.o CMakeFiles/solver.dir/systems/uniformEMField.cpp.o CMakeFiles/solver.dir/systems/rotatingUniformEMField.cpp.o CMakeFiles/solver.dir/systems/sphereAirResistance.cpp.o CMakeFiles/solver.dir/systems/regularizedCoulombRollingResistance.cpp.o CMakeFiles/solver.dir/systems/fixedDipoleEMField.cpp.o CMakeFiles/solver.dir/systems/eddyCurrentDamping.cpp.o CMakeFiles/solver.dir/systems/fixedMonopoleEMField.cpp.o CMakeFiles/solver.dir/systems/uniformMagneticField.cpp.o CMakeFiles/solver.dir/systems/normalContactConstraint.cpp.o CMakeFiles/solver.dir/systems/pointContactConstraint.cpp.o CMakeFiles/solver.dir/systems/pointContactFriction.cpp.o CMakeFiles/solver.dir/systems/modulatedUniformEMField.cpp.o CMakeFiles/solver.dir/systems/instantContactConstraint.cpp.o CMakeFiles/solver.dir/systems/instantContactFriction.cpp.o
   CONFIG = Release
   DEP_FILE = CMakeFiles/solver.dir/link.d
   FLAGS = -O3 -DNDEBUG

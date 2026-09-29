@@ -32,8 +32,9 @@ add_executable(
     systems/normalContactConstraint.cpp
     systems/pointContactConstraint.cpp
     systems/pointContactFriction.cpp
-
-    
+    systems/modulatedUniformEMField.cpp
+    systems/instantContactConstraint.cpp
+    systems/instantContactFriction.cpp
 )
 
 target_link_libraries(
